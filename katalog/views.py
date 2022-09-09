@@ -1,3 +1,14 @@
-from django.shortcuts import render
+# TODO: Create your views here. (jalan)
 
-# TODO: Create your views here.
+from django.shortcuts import render
+from django.shortcuts import render
+from katalog.models import CatalogItem
+
+# Create your views here.
+def show_katalog(request):
+    initial_catalog_data = CatalogItem.objects.all()
+    context = {
+        'list_barang': initial_catalog_data,
+        'nama': 'Eugenius Mario Situmorang'
+    }
+    return render(request, "katalog.html", context)

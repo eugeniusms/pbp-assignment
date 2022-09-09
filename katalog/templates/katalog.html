@@ -20,6 +20,16 @@
       <th>Item URL</th>
     </tr>
     {% comment %} Add the data below this line {% endcomment %}
+      {% for barang in list_barang %}
+      <tr>
+          <th>{{barang.item_name}}</th>
+          <th>Rp. {{barang.item_price}},-</th>
+          <th>{{barang.item_stock}}</th>
+          <th>{{barang.description}}</th>
+          <th>{{barang.rating}}</th>
+          <th>{{barang.URLField}}</th>
+      </tr>
+      {% endfor %}
   </table>
 
  {% endblock content %}
