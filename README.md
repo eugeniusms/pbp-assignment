@@ -67,6 +67,20 @@ Jika hanya dilakukan di dalam lingkungan local server maka hal ini dapat dilakuk
    `https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/`
    ![Django Implementasi 9 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-09.jpg?raw=true)
 
+## Test
+References:
+- https://www.youtube.com/playlist?list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM
+### Unit Tests
+- Test one piece independently of other pieces
+- Fastest to run
+
+### Integration Tests
+- Test multiple pieces together to assure that they work well with one together
+
+### Functional Tests
+- Test that everything works from the end-user's point of view
+- Slowest to run
+
 ## Cara Menggunakan
 
 Apabila kamu ingin menggunakan repositori ini sebagai repositori awalan yang nantinya akan kamu modifikasi:
