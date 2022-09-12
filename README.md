@@ -1,8 +1,11 @@
-# Template Proyek Django PBP
+# Django PBP Tugas 02
+## Eugenius Mario Situmorang (NPM 2106750484)
+<br/>
+Link Deploy: https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/
+<br/>
 
-Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
-
-*Read this in other languages: [Indonesian](README.md), [English](README.en.md)*
+## Flow
+![Django Flow by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/django-flow.jpg?raw=true)
 
 ## Pendahuluan
 
