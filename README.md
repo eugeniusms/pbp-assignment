@@ -38,6 +38,35 @@ tidak perlu melakukan push pada virtual environment karena sudah dicatat dengan 
 
 Jika hanya dilakukan di dalam lingkungan local server maka hal ini dapat dilakukan. Pengguna dapat hanya dengan menggunakan environment Python bawaan dari komputer (root) untuk menginstal dependensi yang dibutuhkan proyek Django sehingga proyek Django dapat berjalan di server "local." Akan tetapi, jika untuk dijalankan di online hoster hal ini cukup susah dilakukan karena server host akan mencari daftar dependensi yang ada di dalam "requirements.txt" untuk disesuaikan dengan paket dependensi yang dimiliki mesin hosting. Jika "requirements.txt" tidak ada karena tidak diinisialisasikan virtual environmentnya, maka mesin host tidak pernah tahu dependensi apa saja yang diperlukan untuk menjalankan server sehingga proyek juga tidak akan berjalan.
 
+## Implementasi struktur proyek
+1. Membuat fungsi show_katalog yang digunakan untuk melakukan pengambilan data dari model dan dikembalikan ke dalam sebuah html
+   `/katalog/views.py`
+   ![Django Implementasi 1 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-01.jpg?raw=true)
+2. Membuat sebuah routing untuk memetakan fungsi show_katalog. Routing: "katalog/" menuju katalog.urls
+   `/project_django/urls.py`
+   ![Django Implementasi 2 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-02.jpg?raw=true)
+3. Pada urls.py yang ada di katalog path "" langsung memetakan fungsi show_katalog
+   `/katalog/urls.py`
+   ![Django Implementasi 3 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-03.jpg?raw=true)
+4. Memetakan data yang didapatkan ke dalam HTML dengan sintaks dari Django untuk pemetaan data template
+   `/katalog/templates/katalog.html`
+   ![Django Implementasi 4 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-04.jpg?raw=true)
+5. Menggunakan css di static untuk menghias tampilan template katalog.html
+   `/katalog/static/katalog.css`
+   ![Django Implementasi 5 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-05.jpg?raw=true)
+6. Membuat aplikasi di Heroku dan menyambungkannya dengan GitHub
+   `https://dashboard.heroku.com/`
+   ![Django Implementasi 6 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-06.jpg?raw=true)
+7. Menambahkan Secrets di GitHub repository
+   `https://github.com/eugeniusms/pbp-tugas-02`
+   ![Django Implementasi 7 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-07.jpg?raw=true)
+8. Menjalankan ulang workflows yang gagal
+   `https://github.com/eugeniusms/pbp-tugas-02`
+   ![Django Implementasi 8 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-08.jpg?raw=true)
+9. Mengakses laman proyek yang telah dideploy
+   `https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/`
+   ![Django Implementasi 9 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-09.jpg?raw=true)
+
 ## Cara Menggunakan
 
 Apabila kamu ingin menggunakan repositori ini sebagai repositori awalan yang nantinya akan kamu modifikasi:
