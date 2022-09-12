@@ -6,6 +6,23 @@ Link Deploy: https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/
 
 ## Bagan request client dan response - Django
 ![Django Flow by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/django-flow.jpg?raw=true)
+Penjelasan:
+1. Client membuka browser untuk mengakses website
+2. Client masuk ke dalam website, maka web server melayani request dari client
+3. WSGI memproses HTTP server untuk website berbasis Python 
+4. Middleware menjembatani integrasi teknologi yang digunakan dalam proyek untuk memproses request
+5. URL Router mengarahkan alamat proyek sesuai permintaan client (urls.py), dari sini diarahkan 
+   menuju fungsi yang berada di views.py
+6. Views (views.py) menyusun apa saja yang akan ditampilkan ke template (html), data yang 
+   diproses diambil dari database yang telah disusun dengan ORM di dalam models.py
+7. Context processor menembakkan data dari views.py menuju template (html)
+8. Template (html) menampilkan tampilan depan dari proyek berdasarkan data context yang ditembak 
+   dari views.py dan alur logika dari template tags
+9. Middleware menjembatani integrasi teknologi yang digunakan dalam proyek untuk memproses 
+   response
+10. WSGI memproses HTTP server untuk website berbasis Python
+11. Web server melayani response dari server untuk dikirimkan ke client
+12. Client mendapatkan response dari web server
 
 ## Mengapa perlu virtual environment?
 
@@ -16,6 +33,10 @@ dependensinya tanpa melakukan konfigurasi pada sistem operasi yang digunakan. "r
 digunakan sebagai pencatatan daftar dependensi dari suatu proyek yang dijalankan dalam virtual
 environment tertentu. Hanya dengan mengetahui daftar dependensi yang ada melalui "requirements.txt" sebuah mesin host contohnya "heroku" dapat mengetahui apa saja dependensi yang harus digunakan untuk menjalankan server. Hal ini juga memudahkan dalam proses penyimpanan di mana user
 tidak perlu melakukan push pada virtual environment karena sudah dicatat dengan baik di "requirements.txt" (virtual environment adalah directory yang cukup memakan penyimpanan repository/host sehingga menghilangkannya dengan .gitignore dapat merampingkan proyek)
+
+## Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+
+Jika hanya dilakukan di dalam lingkungan local server maka hal ini dapat dilakukan. Pengguna dapat hanya dengan menggunakan environment Python bawaan dari komputer (root) untuk menginstal dependensi yang dibutuhkan proyek Django sehingga proyek Django dapat berjalan di server "local." Akan tetapi, jika untuk dijalankan di online hoster hal ini cukup susah dilakukan karena server host akan mencari daftar dependensi yang ada di dalam "requirements.txt" untuk disesuaikan dengan paket dependensi yang dimiliki mesin hosting. Jika "requirements.txt" tidak ada karena tidak diinisialisasikan virtual environmentnya, maka mesin host tidak pernah tahu dependensi apa saja yang diperlukan untuk menjalankan server sehingga proyek juga tidak akan berjalan.
 
 ## Cara Menggunakan
 
