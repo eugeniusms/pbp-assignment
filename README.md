@@ -1,15 +1,21 @@
-# Django PBP Tugas 02
-## Eugenius Mario Situmorang (NPM 2106750484)
+# PBP Tugas 02
+Eugenius Mario Situmorang (NPM 2106750484)
 <br/>
 Link Deploy: https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/
 <br/>
 
-## Flow
+## Bagan request client dan response - Django
 ![Django Flow by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/django-flow.jpg?raw=true)
 
-## Pendahuluan
+## Mengapa perlu virtual environment?
 
-Repositori ini merupakan sebuah template yang dirancang untuk membantu mahasiswa yang sedang mengambil mata kuliah Pemrograman Berbasis Platform (CSGE602022) mengetahui struktur sebuah proyek aplikasi Django serta file dan konfigurasi yang penting dalam berjalannya aplikasi. Kamu dapat dengan bebas menyalin isi dari repositori ini atau memanfaatkan repositori ini sebagai pembelajaran sekaligus awalan dalam membuat sebuah proyek Django.
+Virtual environment diperlukan agar sistem dapat berjalan di lingkungan terisolasi.
+Di mana setiap proyek memiliki kebutuhan/dependensi yang berbeda-beda antara proyek satu
+dengan proyek yang lainnya. Dengan virtual environment, maka proyek dapat berjalan sesuai
+dependensinya tanpa melakukan konfigurasi pada sistem operasi yang digunakan. "requirements.txt"
+digunakan sebagai pencatatan daftar dependensi dari suatu proyek yang dijalankan dalam virtual
+environment tertentu. Hanya dengan mengetahui daftar dependensi yang ada melalui "requirements.txt" sebuah mesin host contohnya "heroku" dapat mengetahui apa saja dependensi yang harus digunakan untuk menjalankan server. Hal ini juga memudahkan dalam proses penyimpanan di mana user
+tidak perlu melakukan push pada virtual environment karena sudah dicatat dengan baik di "requirements.txt" (virtual environment adalah directory yang cukup memakan penyimpanan repository/host sehingga menghilangkannya dengan .gitignore dapat merampingkan proyek)
 
 ## Cara Menggunakan
 
