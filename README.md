@@ -72,6 +72,8 @@ References:
 - https://www.youtube.com/playlist?list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM
 - https://docs.djangoproject.com/en/4.1/ref/urlresolvers/
 - https://github.com/TheDumbfounds/django-testing-tutorial
+- https://www.educba.com/django-reverse/
+
 ### Unit Tests
 - Test one piece independently of other pieces
 - Fastest to run
