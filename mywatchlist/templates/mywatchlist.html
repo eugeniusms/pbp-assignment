@@ -1,0 +1,46 @@
+<html>
+  {% load static %}
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet"  href="{% static 'mywatchlist.css' %}">
+
+      <title>Watchlist Mario</title>
+      <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  {% block content %}
+
+    <h1>Tugas 3 Assignment PBP/PBD</h1>
+
+    <div class="profil">Name: {{nama}}</div>
+    <div class="profil">Student ID: {{npm}}</div>
+
+    <div class="container-tabel">
+      <table>
+        <tr class="judul-tabel">
+          <th>Watched</th>
+          <th>Title</th>
+          <th>Rating</th>
+          <th>Release Date</th>
+          <th>Review</th>
+        </tr>
+        {% for film in list_film %}
+        <tr>
+            <th>{{film.watched}}</th>
+            <th>{{film.title}}</th>
+            <th>{{film.rating}}</th>
+            <th>{{film.release_date}}</th>
+            <th>{{film.review}}</th>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  {% endblock content %}
+  </body>
+</html>
