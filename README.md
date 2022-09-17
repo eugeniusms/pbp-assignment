@@ -1,96 +1,99 @@
-# PBP Tugas 02
-Eugenius Mario Situmorang (NPM 2106750484)
-<br/>
-Link Deploy: https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/
-<br/>
+# PBP Django Project Template
 
-## Bagan request client dan response - Django
-![Django Flow by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/django-flow.jpg?raw=true)
-Penjelasan:
-1. Client membuka browser untuk mengakses website
-2. Client masuk ke dalam website, maka web server melayani request dari client
-3. WSGI memproses HTTP server untuk website berbasis Python 
-4. Middleware menjembatani integrasi teknologi yang digunakan dalam proyek untuk memproses request
-5. URL Router mengarahkan alamat proyek sesuai permintaan client (urls.py), dari sini diarahkan 
-   menuju fungsi yang berada di views.py
-6. Views (views.py) menyusun apa saja yang akan ditampilkan ke template (html), data yang 
-   diproses diambil dari database yang telah disusun dengan ORM di dalam models.py
-7. Context processor menembakkan data dari views.py menuju template (html)
-8. Template (html) menampilkan tampilan depan dari proyek berdasarkan data context yang ditembak 
-   dari views.py dan alur logika dari template tags
-9. Middleware menjembatani integrasi teknologi yang digunakan dalam proyek untuk memproses 
-   response
-10. WSGI memproses HTTP server untuk website berbasis Python
-11. Web server melayani response dari server untuk dikirimkan ke client
-12. Client mendapatkan response dari web server
+Platform-Based Programming (CSGE602022) - Organized by the Faculty of Computer Science Universitas Indonesia, Odd Semester 2022/2023
 
-## Mengapa perlu virtual environment?
+## Introduction
 
-Virtual environment diperlukan agar sistem dapat berjalan di lingkungan terisolasi.
-Di mana setiap proyek memiliki kebutuhan/dependensi yang berbeda-beda antara proyek satu
-dengan proyek yang lainnya. Dengan virtual environment, maka proyek dapat berjalan sesuai
-dependensinya tanpa melakukan konfigurasi pada sistem operasi yang digunakan. "requirements.txt"
-digunakan sebagai pencatatan daftar dependensi dari suatu proyek yang dijalankan dalam virtual
-environment tertentu. Hanya dengan mengetahui daftar dependensi yang ada melalui "requirements.txt" sebuah mesin host contohnya "heroku" dapat mengetahui apa saja dependensi yang harus digunakan untuk menjalankan server. Hal ini juga memudahkan dalam proses penyimpanan di mana user
-tidak perlu melakukan push pada virtual environment karena sudah dicatat dengan baik di "requirements.txt" (virtual environment adalah directory yang cukup memakan penyimpanan repository/host sehingga menghilangkannya dengan .gitignore dapat merampingkan proyek)
+This repository is a template that is designed to help students who take the Platform-Based Development/Programming Course (CSGE602022) to know the structure of a Django Web application project, including the files and configurations that are important in running the application. You can freely copy the contents of this repository or utilise this repository as a learning material and also as a starting code to build a Django Web application project.
 
-## Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+## How to Use
 
-Jika hanya dilakukan di dalam lingkungan local server maka hal ini dapat dilakukan. Pengguna dapat hanya dengan menggunakan environment Python bawaan dari komputer (root) untuk menginstal dependensi yang dibutuhkan proyek Django sehingga proyek Django dapat berjalan di server "local." Akan tetapi, jika untuk dijalankan di online hoster hal ini cukup susah dilakukan karena server host akan mencari daftar dependensi yang ada di dalam "requirements.txt" untuk disesuaikan dengan paket dependensi yang dimiliki mesin hosting. Jika "requirements.txt" tidak ada karena tidak diinisialisasikan virtual environmentnya, maka mesin host tidak pernah tahu dependensi apa saja yang diperlukan untuk menjalankan server sehingga proyek juga tidak akan berjalan.
+If you want to use the code template in this repository as a starter code for
+developing a Django Web application:
 
-## Implementasi struktur proyek
-1. Membuat fungsi show_katalog yang digunakan untuk melakukan pengambilan data dari model dan dikembalikan ke dalam sebuah html
-   `/katalog/views.py`
-   ![Django Implementasi 1 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-01.jpg?raw=true)
-2. Membuat sebuah routing untuk memetakan fungsi show_katalog. Routing: "katalog/" menuju katalog.urls
-   `/project_django/urls.py`
-   ![Django Implementasi 2 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-02.jpg?raw=true)
-3. Pada urls.py yang ada di katalog path "" langsung memetakan fungsi show_katalog
-   `/katalog/urls.py`
-   ![Django Implementasi 3 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-03.jpg?raw=true)
-4. Memetakan data yang didapatkan ke dalam HTML dengan sintaks dari Django untuk pemetaan data template
-   `/katalog/templates/katalog.html`
-   ![Django Implementasi 4 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-04.jpg?raw=true)
-5. Menggunakan css di static untuk menghias tampilan template katalog.html
-   `/katalog/static/katalog.css`
-   ![Django Implementasi 5 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-05.jpg?raw=true)
-6. Membuat aplikasi di Heroku dan menyambungkannya dengan GitHub
-   `https://dashboard.heroku.com/`
-   ![Django Implementasi 6 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-06.jpg?raw=true)
-7. Menambahkan Secrets di GitHub repository
-   `https://github.com/eugeniusms/pbp-tugas-02`
-   ![Django Implementasi 7 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-07.jpg?raw=true)
-8. Menjalankan ulang workflows yang gagal
-   `https://github.com/eugeniusms/pbp-tugas-02`
-   ![Django Implementasi 8 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-08.jpg?raw=true)
-9. Mengakses laman proyek yang telah dideploy
-   `https://pbp-tugas-02-eugeniusms.herokuapp.com/katalog/`
-   ![Django Implementasi 9 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/implementasi-09.jpg?raw=true)
+1. Open the GitHub page of the code template repository and click "**Use this template**"
+   button to make a copy of the repository into your own GitHub account.
+2. Clone the new Django template repository from your GitHub account to a
+   location in the filesystem of your local development environment by using
+   Git:
 
-## Test
-References:
-- https://www.youtube.com/playlist?list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM
-- https://docs.djangoproject.com/en/4.1/ref/urlresolvers/
-- https://github.com/TheDumbfounds/django-testing-tutorial
-- https://www.educba.com/django-reverse/
+   ```shell
+   git clone <URL to your repository on GitHub> <path in local development environment>
+   ```
+3. Go to the location where the cloned repository is located in the local
+   development environment:
 
-### Unit Tests
-- Test one piece independently of other pieces
-- Fastest to run
-```shell
-python manage.py test katalog
-```
+   ```shell
+   cd <path to the cloned repository>
+   ```
+4. Create a Python virtual environment named `env` inside the cloned repository
+   by using Python's `venv` module:
 
-### Integration Tests
-- Test multiple pieces together to assure that they work well with one together
+   ```shell
+   python -m venv env
+   ```
+5. Activate the virtual environment:
 
-### Functional Tests
-- Test that everything works from the end-user's point of view
-- Slowest to run
-```shell
-python manage.py test functional_tests
-```
+   ```shell
+   # Windows
+   .\env\Scripts\activate
+   # Linux/Unix, e.g. Ubuntu, MacOS
+   source env/bin/activate
+   ```
+6. Verify the virtual environment has been activated by looking at the prompt
+   of your shell. Make sure there is a `env` prefix in your shell. For example:
+
+   ```shell
+   # Windows using `pwsh` shell
+   (env) PS C:\Users\RickeyAstley\my-django-app
+   # Linux/Unix, e.g. Ubuntu using `bash` shell
+   (env) rickeyastley@ubuntu:~/my-django-app
+   ```
+
+   > Note: You can use [Visual Studio Code][] (with Python extension) or [PyCharm][]
+   > to open the source code directory that has a virtual environment directory.
+   > Both will detect the virtual environment and use the correct Python virtual
+   > environment. Furthermore, you can also run your shell directly in both text
+   > editor/IDE.
+7. Install the dependencies needed to build, test, and run the application:
+
+   ```shell
+   pip install -r requirements.txt
+   ```
+8. Run the Django Web application using local development server:
+
+   ```shell
+   python manage.py runserver
+   ```
+9. Open http://localhost:8000 in your favourite Web browser to see if the Web
+   application is running.
+
+## Deployment Example
+
+The code template provided a GitHub workflow to deploy the sample Django Web
+application to [Heroku][], which is a Platform-as-a-Service (PaaS) provider
+that lets you to build and run a Web application on their infrastructure. You
+can read the instructions at [Tutorial 0][] to figure out how to configure the
+GitHub Actions to run the provided workflow in your repository.
+
+For reference, the deployed Django Web application example from the original
+code template repository can be found at: https://django-pbp-template.herokuapp.com.
+
+## Next Actions
+
+If you have successfully created your own repository and set up the Django Web
+application project, you can start working on the weekly tutorials and assignments
+related to Django Web application development. 
+
+If you found any issues or have ideas to improve the code template, feel free
+to discuss your proposal via the [issue tracker](https://github.com/pbp-fasilkom-ui/django-pbp-template/issues)
+and create a Pull Request (PR) containing your changes to the code template.
 
 ## Credits
 
-Template ini dibuat berdasarkan [PBP Ganjil 2021](https://gitlab.com/PBP-2021/pbp-lab) yang ditulis oleh Tim Pengajar Pemrograman Berbasis Platform 2021 ([@prakashdivyy](https://gitlab.com/prakashdivyy)) dan [django-template-heroku](https://github.com/laymonage/django-template-heroku) yang ditulis oleh [@laymonage, et al.](https://github.com/laymonage). Template ini dirancang sedemikian rupa sehingga mahasiswa dapat menjadikan template ini sebagai awalan serta acuan dalam mengerjakan tugas maupun dalam berkarya.
+This template was based on [PBP Odd Term 2021/2022](https://gitlab.com/PBP-2021/pbp-lab) written by 2021 Platform Based Programming Teaching Team ([@prakashdivyy](https://gitlab.com/prakashdivyy)) and [django-template-heroku](https://github.com/laymonage/django-template-heroku) written by [@laymonage, et al.](https://github.com/laymonage). This template is designed in such a way so that students can use this template as a starter and reference in doing assignments and their work.
+
+[Heroku]: https://www.heroku.com/
+[Tutorial 0]: https://pbp-fasilkom-ui.github.io/ganjil-2023/en/assignments/tutorial/tutorial-0
+[Visual Studio Code]: https://code.visualstudio.com/
+[PyCharm]: https://www.jetbrains.com/pycharm/

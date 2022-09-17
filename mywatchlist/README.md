@@ -3,15 +3,20 @@ Eugenius Mario Situmorang (NPM 2106750484)
 <br/>
 
 Link Deploy: https://pbp-tugas-02-eugeniusms.herokuapp.com/
-HTML: https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/html/
-XML: https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/xml/
-JSON: https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/json/
+
+<br/>
+
+HTML | XML | JSON
+--- | --- | --- 
+https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/html/ | https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/xml/ | https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/json/ 
+
 <br/>
 
 ## Perbedaan JSON, XML, dan HTML
-- JSON: 
-- XML:
-- HTML:
+
+HTML | XML | JSON
+--- | --- | --- 
+- Berbasis notasi objek dalam JavaScript | https://pbp-tugas-02-eugeniusms.herokuapp.com/mywatchlist/xml/ | <ul><li>Berbasis notasi objek dalam JavaScript</li><li>Mendukung tipe data array</li><li>Struktur lebih sederhana sehingga mudah dibaca</li><li>Tidak memerlukan pembuka maupun penutup tag</li><li>Kurang begitu aman</li><li>Tidak mendukung comments</li><li>Hanya mendukung encoding UTF-8</li></ul>
 
 ## Mengapa perlu data delivery dalam pengimplementasian sebuah platform?
 
