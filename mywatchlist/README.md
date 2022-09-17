@@ -59,13 +59,13 @@ Implementasi di dunia nyata menuntut adanya perubahan data yang dinamis, artinya
 ## Postman Screenshot
 1. HTML
    `[GET] http://localhost:8000/mywatchlist/html/`
-   ![Postman 1 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-01.jpg?raw=true)
+   ![Postman 1 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-01.png?raw=true)
 2. XML
    `[GET] http://localhost:8000/mywatchlist/xml/`
-   ![Postman 2 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-02.jpg?raw=true)
+   ![Postman 2 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-02.png?raw=true)
 3. JSON
    `[GET] http://localhost:8000/mywatchlist/json/`
-   ![Postman 3 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-03.jpg?raw=true)
+   ![Postman 3 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-03.png?raw=true)
 
 ## Test
 References:
