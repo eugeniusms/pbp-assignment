@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields":{
+            "watched": true,
+            "title": "Game of Thrones",
+            "rating": 5,
+            "release_date": "2011-04-17",
+            "review": "This is the best film series that tells about the struggle for the throne."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields":{
+            "watched": true,
+            "title": "Interstellar",
+            "rating": 5,
+            "release_date": "2014-11-06",
+            "review": "This is the best space genre film I've ever seen"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields":{
+            "watched": true,
+            "title": "The Imitation Game",
+            "rating": 5,
+            "release_date": "2014-09-28",
+            "review": "This is the best biographical film especially I am also in the field of computer science"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields":{
+            "watched": true,
+            "title": "Start Up",
+            "rating": 5,
+            "release_date": "2020-10-17",
+            "review": "This film motivates me to keep moving forward to achieve my dream"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields":{
+            "watched":  true,
+            "title": "One Piece Film: Red",
+            "rating": 4,
+            "release_date": "2022-09-17",
+            "review": "This film is actually interesting because it brings up characters that have not been brought up for a long time, but the root of the conflict is less clear"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields":{
+            "watched": false,
+            "title": "Three Idiots",
+            "rating": 1,
+            "release_date": "2009-12-25",
+            "review": "-"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields":{
+            "watched": false,
+            "title": "Bad Genius",
+            "rating": 1,
+            "release_date": "2017-08-23",
+            "review": "-"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields":{
+            "watched": true,
+            "title": "Thor: Love and Thunder",
+            "rating": 5,
+            "release_date": "2022-07-06",
+            "review": "This film is very entertaining, especially the jokes that Thor makes"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields":{
+            "watched": true,
+            "title": "Shang-Chi and the Legend of the Ten Rings",
+            "rating": 4,
+            "release_date": "2021-09-30",
+            "review": "Visually this film is amazing, but the climax is not as expected"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields":{
+            "watched": true,
+            "title": "Everything Everywhere All at Once",
+            "rating": 5,
+            "release_date": "2022-06-22",
+            "review": "This film is very entertaining as well as touching the heart, besides that the nature of the multiverse concept is impressive"
+        }
+    }
+]
