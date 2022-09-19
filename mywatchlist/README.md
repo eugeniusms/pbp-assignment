@@ -67,15 +67,10 @@ Implementasi di dunia nyata menuntut adanya perubahan data yang dinamis, artinya
    `[GET] http://localhost:8000/mywatchlist/json/`
    ![Postman 3 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-03/postman-03.png?raw=true)
 
-## Test
-References:
-- 
-
-### Unit Tests
-- Test one piece independently of other pieces
-- Fastest to run
+### Run Tests
 ```shell
-python manage.py test mywishlist
+python manage.py collectstatic
+python manage.py test
 ```
 
 ## Credits

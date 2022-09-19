@@ -22,6 +22,14 @@ body {
     margin-right: 14px;
 }
 
+.tonton {
+    background-color: #5F6F94;
+    color: white;
+    border-radius: 14px;
+    border: 2px solid black;
+    margin: 0px 300px 28px;
+}
+
 th, td {
     border: 1px solid black;
     padding: 10px 24px;
