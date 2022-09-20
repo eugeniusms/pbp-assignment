@@ -5,6 +5,13 @@ from django.core import serializers
 
 from mywatchlist.models import MyWatchList
 
+def mywatchlist(request):
+    context = {
+        'nama': 'Eugenius Mario Situmorang',
+        'npm': '2106750484'
+    }
+    return render(request, "mywatchlist_homepage.html", context)
+
 def show_html(request):
     # Mengambil data MyWatchList
     data_mywatchlist = MyWatchList.objects.all()
