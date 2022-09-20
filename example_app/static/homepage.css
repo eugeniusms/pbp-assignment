@@ -75,3 +75,59 @@
     color: #25C2A0;
     text-decoration: none;
 }
+
+.assignment {
+    display: flex;
+    color: #E3E3E3;
+    cursor: pointer;
+    width: 300px;
+    border-right: 2px solid #323334;
+    margin-top: 8px;
+}
+
+.assignment > .sidebar > p {
+    padding: 8px 20px;
+}
+
+.assignment > .sidebar > p:hover {
+    color: #25C2A0;
+}
+
+.assignment > .sidebar > div {
+    padding: 0px 40px;
+}
+
+.assignment > .sidebar > div > p {
+    padding: 8px 0px;
+}
+
+.assignment > .sidebar > div > p:hover {
+    color: #25C2A0;
+}
+
+.mainpage {
+    position: absolute;
+    top: 80px;
+    left: 320px;
+}
+
+.mainpage > h1 {
+    font-size: 3rem;
+    width: 800px;
+    line-height: 4rem;
+    margin-bottom: 1.8rem;
+}
+
+.mainpage > p {
+    width: 800px;
+}
+
+a {
+    text-decoration: none;
+    color: #E3E3E3;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #25C2A0;
+}
