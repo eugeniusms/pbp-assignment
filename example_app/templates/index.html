@@ -1,11 +1,44 @@
-{% extends 'base.html' %}
+<html>
 {% load static %}
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet"  href="{% static 'homepage.css' %}">
 
-{% block meta %}
-<title>Hello, world!</title>
-{% endblock meta %}
+      <title>PBP Assignment Mario</title>
 
+      <link rel="shortcut icon" type="image/png" href="{% static 'logo.png' %}"/>
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
+
+<body>
 {% block content %}
+  <section class="navbar">
+    <div class="navbar-content">
+      <div class="logo-pbp">
+        <img src="{% static 'logo.png' %}" width="32px" height="32px"/>
+        <a href="https://pbp-fasilkom-ui.github.io/ganjil-2023/">
+          <p>PBP Ganjil 22/23</p>
+        </a>
+      </div>
+      <div>Assignments</div>
+      <a href="https://pbp-fasilkom-ui.github.io/ganjil-2023/docs/intro">
+        <div>Guides</div>
+      </a>
+    </div>
+    <div class="navbar-content">
+      <a href="https://pbp-fasilkom-ui.github.io/ganjil-2023/playground">
+        <div>Playground</div>
+      </a>
+      <a href="https://github.com/eugeniusms">
+        <div>Eugenius Mario Situmorang</div>
+      </a>
+    </div>
+  </section>
+
   <h1>Hello, this is Mario's PBP/PBD website!</h1>
   <p>Built with Django</p>
   <h3>Tugas</h3>
@@ -43,3 +76,6 @@
   </li>
   </ul>   
 {% endblock content %}
+</body>
+
+</html>

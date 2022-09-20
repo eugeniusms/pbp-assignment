@@ -1,0 +1,56 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #242526;
+    color: #E3E3E3;
+    padding: 14px 32px 14px 16px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar-content {
+    display: inline-flex;
+    background-color: #242526;
+    color: #E3E3E3;
+    gap: 32px;
+    font-size: 16px;
+    align-items: center;
+}
+
+.navbar-content > div:hover {
+    color: #25C2A0;;
+}
+
+.logo-pbp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #E3E3E3;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.navbar-content > a {
+    color: #E3E3E3;
+    text-decoration: none;
+}
+
+.navbar-content > a:hover {
+    color: #25C2A0;
+    text-decoration: none;
+}
+
+.navbar-content > .logo-pbp > a {
+    color: #E3E3E3;
+    text-decoration: none;
+}
+
+.navbar-content > .logo-pbp > a:hover {
+    color: #25C2A0;
+    text-decoration: none;
+}
