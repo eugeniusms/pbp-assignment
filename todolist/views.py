@@ -52,3 +52,9 @@ def todolist(request):
 @login_required(login_url='/todolist/login/')
 def create_task(request):
     return render(request, "create_task.html")
+
+@login_required(login_url='/todolist/login/')
+def register(request):
+    if request.method == 'POST':
+        judul = request.POST.get('judul') # di GET dari name of <input> dalam form
+        deskripsi = request.POST.get('deskripsi')
