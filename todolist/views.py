@@ -49,3 +49,6 @@ def logout_user(request):
 def todolist(request):
     return render(request, "todolist.html")
 
+@login_required(login_url='/todolist/login/')
+def create_task(request):
+    return render(request, "create_task.html")
