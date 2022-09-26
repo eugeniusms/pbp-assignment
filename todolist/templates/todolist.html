@@ -10,6 +10,11 @@
                 <p>Judul: {{todo.title}}</p>
                 <p>Deskripsi: {{todo.description}}</p>
                 <p>Dibuat: {{todo.date}}</p>
+                {% if todo.status %}
+                <p>Status: Selesai</p>
+                {% else %}
+                <p>Status: Belum Selesai</p>
+                {% endif %}
             </div>
         </li>
     {% endfor %}

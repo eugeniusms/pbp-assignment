@@ -50,6 +50,34 @@ def logout_user(request):
     return response
 
 @login_required(login_url='/todolist/login/')
+def create_task(request):
+    if request.method == "POST":
+        # Mengambil data request melalui TaskForm
+        form = TaskForm(request.POST)
+        # Jika form yang di POST valid
+        if form.is_valid():
+            # cek data yang masuk ke dalam form melalui request.POST
+            print(form.cleaned_data) 
+            # Menyusun task sesuai model Task untuk dimasukkan ke database
+            task = Task(
+                user = request.user, # Generate user berdasarkan user yang login
+                date = datetime.now(), # Generate date sesuai datetime saat POST
+                title = form.cleaned_data['title'], # Mengambil title dari form di atas
+                description = form.cleaned_data['description'], # Mengambil description dari form di atas
+                is_finished = False # Default dari is_finished adalah False
+            )
+            # Memasukkan task ke database
+            task.save()
+            return HttpResponseRedirect("/todolist")
+    else:
+        form = TaskForm()
+
+    # Merender create_task.html
+    return render(request, "create_task.html", {
+        "form": form
+    })
+
+@login_required(login_url='/todolist/login/')
 def todolist(request):
     # Mengambil data sesuai dengan user yang login
     username = request.user.username
@@ -64,32 +92,6 @@ def todolist(request):
     
     return render(request, "todolist.html", context)
 
-@login_required(login_url='/todolist/login/')
-def create_task(request):
-    if request.method == "POST":
-        # Mengambil data request melalui TaskForm
-        form = TaskForm(request.POST)
-        # Jika form yang di POST valid
-        if form.is_valid():
-            # cek data yang masuk ke dalam form melalui request.POST
-            print(form.cleaned_data) 
-            # Menyusun task sesuai model Task untuk dimasukkan ke database
-            task = Task(
-                user = request.user, # Generate user berdasarkan user yang login
-                date = datetime.now(), # Generate date sesuai datetime saat POST
-                title = form.cleaned_data['title'], # Mengambil title dari form di atas
-                description = form.cleaned_data['description'] # Mengambil description dari form di atas
-            )
-            # Memasukkan task ke database
-            task.save()
-            return HttpResponseRedirect("/todolist")
-    else:
-        form = TaskForm()
-
-    # Merender create_task.html
-    return render(request, "create_task.html", {
-        "form": form
-    })
 
 # References:
 # 1. https://www.youtube.com/watch?v=3XOS_UpJirU

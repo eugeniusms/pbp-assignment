@@ -7,3 +7,4 @@ class Task(models.Model):
     date = models.DateField() # https://stackoverflow.com/questions/2771676/django-datetime-issues-default-datetime-now
     title = models.CharField(max_length=255)
     description = models.TextField()
+    is_finished = models.BooleanField(default=False)
