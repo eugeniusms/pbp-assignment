@@ -92,6 +92,21 @@ def todolist(request):
     
     return render(request, "todolist.html", context)
 
+@login_required(login_url='/todolist/login/')
+def change_status(request, id):
+    # Mengambil data task sesuai idnya
+    task = Task.objects.get(id=id)
+
+    # Switch statusnya
+    if task.is_finished:
+        task.is_finished = False
+    else:
+        task.is_finished = True
+
+    # Menyimpan task kembali ke database
+    task.save()
+    # Render ke todolist.html
+    return HttpResponseRedirect("/todolist")
 
 # References:
 # 1. https://www.youtube.com/watch?v=3XOS_UpJirU

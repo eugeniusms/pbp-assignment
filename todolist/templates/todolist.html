@@ -10,11 +10,15 @@
                 <p>Judul: {{todo.title}}</p>
                 <p>Deskripsi: {{todo.description}}</p>
                 <p>Dibuat: {{todo.date}}</p>
-                {% if todo.status %}
+                {% if todo.is_finished %}
                 <p>Status: Selesai</p>
                 {% else %}
                 <p>Status: Belum Selesai</p>
                 {% endif %}
+                <!-- pengubahan status dilakukan di penembakan url berikut -->
+                <a href="/todolist/change-status/{{todo.id}}">
+                    <button type="submit">Ubah Status</button>
+                </a>
             </div>
         </li>
     {% endfor %}
