@@ -19,6 +19,10 @@
                 <a href="/todolist/change-status/{{todo.id}}">
                     <button type="submit">Ubah Status</button>
                 </a>
+                <!-- penghapusan task dilakukan di penembakan url berikut -->
+                <a href="/todolist/delete-task/{{todo.id}}">
+                    <button type="submit">Hapus</button>
+                </a>
             </div>
         </li>
     {% endfor %}

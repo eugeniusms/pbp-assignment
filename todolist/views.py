@@ -108,5 +108,15 @@ def change_status(request, id):
     # Render ke todolist.html
     return HttpResponseRedirect("/todolist")
 
+@login_required(login_url='/todolist/login/')
+def delete_task(request, id):
+    # Mengambil data task sesuai idnya
+    task = Task.objects.get(id=id)
+    # Menghapus task sesuai idnya
+    task.delete()
+    # Render ke todolist.html
+    return HttpResponseRedirect("/todolist")
+
 # References:
 # 1. https://www.youtube.com/watch?v=3XOS_UpJirU
+# 2. https://www.w3schools.com/django/django_delete_record.php
