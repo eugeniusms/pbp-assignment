@@ -51,8 +51,12 @@ def logout_user(request):
 
 @login_required(login_url='/todolist/login/')
 def todolist(request):
-    
-    return render(request, "todolist.html")
+    # Mengambil data MyWatchList
+    data_todolist = Task.objects.all()
+    context = {
+        "todolist": data_todolist
+    }
+    return render(request, "todolist.html", context)
 
 @login_required(login_url='/todolist/login/')
 def create_task(request):
