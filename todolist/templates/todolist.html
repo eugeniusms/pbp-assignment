@@ -3,14 +3,17 @@
 
     <br>
 
+    <ul>
     {% for todo in todolist %}
-        <tr>
-            <th>{{todo.title}}</th>
-            <th>{{todo.description}}</th>
-            <th>{{todo.date}}</th>
-            <th>{{todo.user}}</th>
-        </tr>
+        <li>
+            <div>
+                <p>Judul: {{todo.title}}</p>
+                <p>Deskripsi: {{todo.description}}</p>
+                <p>Dibuat: {{todo.date}}</p>
+            </div>
+        </li>
     {% endfor %}
+    </ul>
 
     <br>
 
