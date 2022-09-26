@@ -12,31 +12,9 @@
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Judul: </td>
-                <td><input type="text" name="judul" placeholder="Judul" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Deskripsi: </td>
-                <td><input type="text" name="deskripsi" placeholder="Deskripsi" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn create_task_btn" type="submit" value="Tambah"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+        {{ form.as_p }}
+        <button>Submit</button>
+    </form>   
 
 </div>
 

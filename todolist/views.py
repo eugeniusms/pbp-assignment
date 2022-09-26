@@ -1,3 +1,4 @@
+from wsgiref.util import request_uri
 from django.shortcuts import render
 
 from django.shortcuts import redirect
@@ -7,9 +8,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
+from todolist.forms import TaskForm
+
+from datetime import datetime
 
 def register(request):
     form = UserCreationForm()
@@ -32,7 +36,7 @@ def login_user(request):
         if user is not None:
             login(request, user) # melakukan login terlebih dahulu
             response = HttpResponseRedirect(reverse("todolist:todolist")) # membuat response
-            response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
+            response.set_cookie('last_login', str(datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
         else:
             messages.info(request, 'Username atau Password salah!')
@@ -51,7 +55,17 @@ def todolist(request):
 
 @login_required(login_url='/todolist/login/')
 def create_task(request):
-    return render(request, "create_task.html")
+    form = TaskForm()
+    if request.method == 'POST':
+        form = TaskForm(request.POST, user=request.user, date=datetime.now())
+        if form.is_valid():
+            form.save()
+            return redirect(todolist)
+
+    context = {
+        'form': form,
+    }
+    return render(request, "create_task.html", context)
 
 @login_required(login_url='/todolist/login/')
 def register(request):
