@@ -1,5 +1,16 @@
 <html>
     Hello Todolist!
+
+    {% for todo in todolist %}
+        <tr>
+            <th>{{film.watched}}</th>
+            <th>{{film.title}}</th>
+            <th>{{film.rating}}</th>
+            <th>{{film.release_date}}</th>
+            <th>{{film.review}}</th>
+        </tr>
+    {% endfor %}
+
     <button>
         <a href="{% url 'todolist:create_task' %}">Tambah Task Baru</a>
     </button>

@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from todolist.forms import TaskForm
-
+from todolist.models import Task
 from datetime import datetime
 
 def register(request):
@@ -51,24 +51,35 @@ def logout_user(request):
 
 @login_required(login_url='/todolist/login/')
 def todolist(request):
+    
     return render(request, "todolist.html")
 
 @login_required(login_url='/todolist/login/')
 def create_task(request):
-    form = TaskForm()
-    if request.method == 'POST':
-        form = TaskForm(request.POST, user=request.user, date=datetime.now())
+    if request.method == "POST":
+        # Mengambil data request melalui TaskForm
+        form = TaskForm(request.POST)
+        # Jika form yang di POST valid
         if form.is_valid():
-            form.save()
-            return redirect(todolist)
+            # cek data yang masuk ke dalam form melalui request.POST
+            print(form.cleaned_data) 
+            # Menyusun task sesuai model Task untuk dimasukkan ke database
+            task = Task(
+                user = request.user, # Generate user berdasarkan user yang login
+                date = datetime.now(), # Generate date sesuai datetime saat POST
+                title = form.cleaned_data['title'], # Mengambil title dari form di atas
+                description = form.cleaned_data['description'] # Mengambil description dari form di atas
+            )
+            # Memasukkan task ke database
+            task.save()
+            return HttpResponseRedirect("/todolist")
+    else:
+        form = TaskForm()
 
-    context = {
-        'form': form,
-    }
-    return render(request, "create_task.html", context)
+    # Merender create_task.html
+    return render(request, "create_task.html", {
+        "form": form
+    })
 
-@login_required(login_url='/todolist/login/')
-def register(request):
-    if request.method == 'POST':
-        judul = request.POST.get('judul') # di GET dari name of <input> dalam form
-        deskripsi = request.POST.get('deskripsi')
+# References:
+# 1. https://www.youtube.com/watch?v=3XOS_UpJirU

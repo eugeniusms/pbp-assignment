@@ -1,9 +1,6 @@
 
-from django.db import models
-from django.forms import ModelForm
-from todolist.models import Task
+from django import forms
 
-class TaskForm(ModelForm):
-    class Meta:
-        model = Task
-        fields = ['title', 'description']
+class TaskForm(forms.Form):
+    title = forms.CharField()
+    description = forms.CharField()

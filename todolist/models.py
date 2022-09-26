@@ -7,8 +7,3 @@ class Task(models.Model):
     date = models.DateField() # https://stackoverflow.com/questions/2771676/django-datetime-issues-default-datetime-now
     title = models.CharField(max_length=255)
     description = models.TextField()
-
-    def __init__(self, *args, date=datetime.now(), **kwargs):
-        self.date = date
-        self.user = User()
-        return super().__init__(*args, **kwargs)
