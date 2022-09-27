@@ -16,43 +16,48 @@
 {% block content %}
 <body>
     <section class="navbar">
+        <a href="{% url 'todolist:create_task' %}">
+            <button class="add-task-button">
+                Create New Task
+            </button>
+        </a>
+        <h1>
+            Hi {{ username }}, this is your todolist!
+        </h1>
         <a href="{% url 'todolist:logout' %}">
             <button class="logout-button"> 
             Logout
             </button>
         </a>
     </section>
-    
 
-    <a href="{% url 'todolist:create_task' %}">
-        <button>
-            Create New Task
-        </button>
-    </a>
+    
     
     <div class="todolist">
         <div class="todolist-list">
             <div class="todolist-todo">
-                <h1>To Do</h1>
+                <h1 style="color:#e05d43;">To Do</h1>
                 {% for todo in todolist %}
                     {% if todo.is_finished == False %}
                         <div class="task-card">
-                            <p>{{todo.title}}</p>
-                            <p>{{todo.description}}</p>
-                            <p class="tanggal">(Created {{todo.date}})</p>
-                            {% if todo.is_finished %}
+                            <p class="task-judul">{{todo.title}}</p>
+                            <p class="task-deskripsi">{{todo.description}}</p>
+                            <p class="task-tanggal">Created {{todo.date}}</p>
+                            <!-- {% if todo.is_finished %}
                             <p>Status: Selesai</p>
                             {% else %}
                             <p>Status: Belum Selesai</p>
-                            {% endif %}
-                            <!-- pengubahan status dilakukan di penembakan url berikut -->
-                            <a href="/todolist/change-status/{{todo.id}}">
-                                <button type="submit">Done</button>
-                            </a>
-                            <!-- penghapusan task dilakukan di penembakan url berikut -->
-                            <a href="/todolist/delete-task/{{todo.id}}">
-                                <button type="submit">Delete</button>
-                            </a>
+                            {% endif %} -->
+                            <div class="task-tombol">
+                                <!-- pengubahan status dilakukan di penembakan url berikut -->
+                                <a href="/todolist/change-status/{{todo.id}}">
+                                    <button type="submit" class="task-change-done">Finish >></button>
+                                </a>
+                                <!-- penghapusan task dilakukan di penembakan url berikut -->
+                                <a href="/todolist/delete-task/{{todo.id}}">
+                                    <button type="submit" class="task-delete">Delete</button>
+                                </a>
+                            </div>
                         </div>
                         <div class="sekat-vertikal"></div>
                     {% endif %}
@@ -60,26 +65,28 @@
             </div>
             <div class="sekat-horizontal"></div>
             <div class="todolist-done">
-                <h1>Done</h1>
+                <h1 style="color:#25C2A0;">Done</h1>
                 {% for todo in todolist %}
                     {% if todo.is_finished %}
                         <div class="task-card">
-                            <p>{{todo.title}}</p>
-                            <p>{{todo.description}}</p>
-                            <p class="tanggal">(Created {{todo.date}})</p>
-                            {% if todo.is_finished %}
+                            <p class="task-judul">{{todo.title}}</p>
+                            <p class="task-deskripsi">{{todo.description}}</p>
+                            <p class="task-tanggal">Created {{todo.date}}</p>
+                            <!-- {% if todo.is_finished %}
                             <p>Status: Selesai</p>
                             {% else %}
                             <p>Status: Belum Selesai</p>
-                            {% endif %}
-                            <!-- pengubahan status dilakukan di penembakan url berikut -->
-                            <a href="/todolist/change-status/{{todo.id}}">
-                                <button type="submit">Return to To Do</button>
-                            </a>
-                            <!-- penghapusan task dilakukan di penembakan url berikut -->
-                            <a href="/todolist/delete-task/{{todo.id}}">
-                                <button type="submit">Delete</button>
-                            </a>
+                            {% endif %} -->
+                            <div class="task-tombol">
+                                <!-- pengubahan status dilakukan di penembakan url berikut -->
+                                <a href="/todolist/change-status/{{todo.id}}">
+                                    <button type="submit" class="task-change-todo"><< Rework</button>
+                                </a>
+                                <!-- penghapusan task dilakukan di penembakan url berikut -->
+                                <a href="/todolist/delete-task/{{todo.id}}">
+                                    <button type="submit" class="task-delete">Delete</button>
+                                </a>
+                            </div>
                         </div>
                         <div class="sekat-vertikal"></div>
                     {% endif %}
@@ -87,6 +94,10 @@
             </div>
         </div>
     </div>
+
+    <div class="sekat-vertikal"></div>
+    <div class="sekat-vertikal"></div>
+    <div class="sekat-vertikal"></div>
 
 </body>
 {% endblock content %}
