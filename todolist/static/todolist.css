@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: #1B1B1D; 
+}
+ 
+body {
+    margin-top: 32px;
+    text-align:center;
+    background-color: #1B1B1D;
+}
+
+.logout-button {
+    background-color: #e05d43;
+}
+
+.todolist {
+    display: flex;
+    justify-content: center;
+}
+
+.todolist-list {
+    display: flex;
+}
+
+.task-card {
+    background-color: #E3E3E3;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    width: 480px;
+}
+
+.task-card .tanggal {
+    text-align: right;
+    font-size: small;
+}
+
+.sekat-horizontal {
+    width: 40px;
+}
+
+.sekat-vertikal {
+    height: 10px;
+}
+
+h1 {
+    color: white;
+    font-size: 24px;
+}
+

@@ -56,3 +56,12 @@ td {
 form table tr td {
     padding: 10px;
 }
+
+a {
+    font-size: 14px;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #25C2A0;
+}
