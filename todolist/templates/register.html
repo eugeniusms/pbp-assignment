@@ -1,34 +1,44 @@
-{% extends 'base.html' %}
+<html>
+{% load static %}
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet"  href="{% static 'register.css' %}">
 
-{% block meta %}
-<title>Registrasi Akun</title>
-{% endblock meta %}
+      <title>EuTodolist Sign Up</title>
+      <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
-{% block content %}  
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
 
-<div class = "login">
-    
-    <h1>Formulir Registrasi</h1>  
+{% block content %}
+<div class="signup-container">
+    <div class="signup">
+        
+        <h1>EuTodolist Sign Up</h1>  
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
+            <form method="POST" >  
+                {% csrf_token %}  
+                <table cellspacing="0" cellpadding="0">  
+                    {{ form.as_table }}  
+                    <tr>  
+                        <td></td>
+                        <td><button type="submit" name="submit" value="Daftar"/>Daftar</button></td>  
+                    </tr>  
+                </table>  
+            </form>
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
+        {% if messages %}  
+            <ul>   
+                {% for message in messages %}  
+                    <li>{{ message }}</li>  
+                    {% endfor %}  
+            </ul>   
+        {% endif %}
 
-</div>  
+    </div>  
+</div>
 
 {% endblock content %}

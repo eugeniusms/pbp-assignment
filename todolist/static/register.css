@@ -7,25 +7,26 @@
 }
  
 body {
-    margin-top: 32px;
+    margin-top: 16px;
     text-align:center;
     background-color: #1B1B1D;
 }
 
-.login-container {
+.signup-container {
     display: flex;
     justify-content: center;
-    margin-top: 120px;
+    margin-top: 60px;
 }
 
 input {
-    padding: 3px;
+    padding: 6px;
     border-radius: 6px;
     border: none;
     color: #1B1B1D;
+    width: 200px;
 }
 
-.login-form {
+.signup-form {
     padding: 20px 20px; 
     background-color: #E3E3E3;
     border-radius: 8px;
@@ -35,8 +36,8 @@ td {
     color: #1B1B1D;
 }
 
-.login-form form table tr td {
-    padding: 6px;
+form table tr td {
+    padding: 20px;
 }
 
 button {
@@ -59,6 +60,27 @@ button:hover {
 
 .regist-ref a:hover {
     color: #25C2A0;
+}
+
+table {
+    background-color: #E3E3E3;
+    padding: 40px 40px;
+    border-radius: 8px;
+    border: none;
+}
+
+table tbody tr th label {
+    color:#1B1B1D;
+}
+
+.helptext {
+    font-size: small;
+    color:rgb(172, 94, 94);
+}
+
+.helptext ul li {
+    font-size: small;
+    color:rgb(172, 94, 94);
 }
 
 /* TOAST */

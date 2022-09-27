@@ -14,6 +14,7 @@
   </head>
 
 {% block content %}
+<body>
     <div class="login-container">
         <div class="login">
             <h1>EuTodolist Login</h1>
@@ -51,12 +52,12 @@
                     {% for message in messages %}
                         {{ message }}
                     {% endfor %}
-            {% endif %}  
+                {% endif %}  
             </div>
 
         </div>
     </div>
-
+</body>
 {% endblock content %}
 <!-- script toast jika ada notification tidak valid -->
 <script>
