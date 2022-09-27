@@ -28,6 +28,9 @@ def register(request):
             return redirect('todolist:login')
     
     context = {'form':form}
+
+    # jeda 2 detik untuk menampilkan response
+    time.sleep(2)
     return render(request, 'register.html', context)
 
 def login_user(request):

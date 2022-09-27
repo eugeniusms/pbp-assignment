@@ -16,7 +16,6 @@
 {% block content %}
 <div class="signup-container">
     <div class="signup">
-        
         <h1>EuTodolist Sign Up</h1>  
 
             <form method="POST" >  
@@ -30,15 +29,29 @@
                 </table>  
             </form>
 
-        {% if messages %}  
-            <ul>   
-                {% for message in messages %}  
-                    <li>{{ message }}</li>  
-                    {% endfor %}  
-            </ul>   
-        {% endif %}
+        <div class="regist-ref">
+            Sudah mempunyai akun? <a href="{% url 'todolist:login' %}">Masuk Akun</a>
+        </div>
+
+        <div id="invalidinput">
+            {% if messages %}  
+                <ul>   
+                    {% for message in messages %}  
+                        <li>{{ message }}</li>  
+                        {% endfor %}  
+                </ul>   
+            {% endif %}
+        </div>
 
     </div>  
 </div>
-
+<!-- script toast jika ada notification tidak valid -->
+<script>
+    function myFunction() {
+      var x = document.getElementById("invalidinput");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+    }
+</script>
 {% endblock content %}
+</html>

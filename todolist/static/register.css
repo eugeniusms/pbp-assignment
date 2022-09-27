@@ -15,7 +15,7 @@ body {
 .signup-container {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 input {
@@ -81,6 +81,14 @@ table tbody tr th label {
 .helptext ul li {
     font-size: small;
     color:rgb(172, 94, 94);
+}
+
+.errorlist li {
+    color: white;
+    font-size: small;
+    background-color: rgb(172, 94, 94);
+    padding: 4px;
+    border-radius: 8px;
 }
 
 /* TOAST */
