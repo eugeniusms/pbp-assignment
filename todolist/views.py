@@ -15,6 +15,8 @@ from todolist.forms import TaskForm
 from todolist.models import Task
 from datetime import datetime
 
+import time
+
 def register(request):
     form = UserCreationForm()
 
@@ -41,6 +43,9 @@ def login_user(request):
         else:
             messages.info(request, 'Username atau Password salah!')
     context = {}
+
+    # jeda 2 detik untuk menampilkan response
+    time.sleep(2)
     return render(request, 'login.html', context)
 
 def logout_user(request):

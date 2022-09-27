@@ -1,45 +1,69 @@
-{% extends 'base.html' %}
+<html>
+{% load static %}
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet"  href="{% static 'login.css' %}">
 
-{% block meta %}
-<title>Login</title>
-{% endblock meta %}
+      <title>EuTodolist Login</title>
+      <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
 
 {% block content %}
+    <div class="login-container">
+        <div class="login">
+            <h1>EuTodolist Login</h1>
+            
+            <div class="login-form">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>Username</td>
+                            <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                        </tr>
+                                
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button onClick="myFunction()" class="btn login_btn" type="submit" value="Login">Login</button></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
 
-<div class = "login">
+               
+                
+            <div class="regist-ref">
+                Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+            </div>
 
-    <h1>Login</h1>
+            <div id="invalidinput">
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+            {% endif %}  
+            </div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
-</div>
+        </div>
+    </div>
 
 {% endblock content %}
+<!-- script toast jika ada notification tidak valid -->
+<script>
+function myFunction() {
+  var x = document.getElementById("invalidinput");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+}
+</script>
+</html>
