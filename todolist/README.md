@@ -51,4 +51,415 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     diberikan styling.
     ![Alur 7 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-04/alur-07.jpg?raw=true)
 
+## Implementasi Proyek
+1.  Jalankan command membuat aplikasi bernama "todolist" di base directory
+    ```
+    python manage.py startapp todolist
+    ```
 
+2.  Menambahkan path todolist di dalam path yang ada di `/project_django/urls.py`
+    ```
+    path('todolist/', include('todolist.urls'))
+    ```
+
+3.  Menyusun model bernama Task dengan atribut user, date, title, dan description sesuai 
+    fieldnya di dalam `/todolist/models.py`
+    ```
+    from django.db import models
+    from django.contrib.auth.models import User
+
+    class Task(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE) 
+        date = models.DateField() 
+        title = models.CharField(max_length=255)
+        description = models.TextField()
+    ```
+
+4.  Mengimplementasikan form registrasi, login, dan logout pengguna.
+    ### Registrasi
+    Tambahkan views logic untuk registrasi di dalam `/todolist/views.py`
+    ```
+    def register(request):
+        form = UserCreationForm()
+
+        if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Akun telah berhasil dibuat!')
+                return redirect('todolist:login')
+        
+        context = {'form':form}
+
+        # jeda 2 detik untuk menampilkan response
+        time.sleep(2)
+        return render(request, 'register.html', context)
+    ```
+    Views mengarah ke register.html yang terdapat form register di dalamnya
+    ```
+    <form method="POST" >  
+        {% csrf_token %}  
+        <table cellspacing="0" cellpadding="0">  
+            {{ form.as_table }}  
+            <tr>  
+                <td></td>
+                <td><button type="submit" name="submit" value="Daftar"/>Sign Up</button></td>  
+            </tr>  
+        </table>  
+    </form>
+    ```
+    ### Login
+    Tambahkan views logic untuk login di dalam `/todolist/views.py`
+    ```
+    def login_user(request):
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user) # melakukan login terlebih dahulu
+                response = HttpResponseRedirect(reverse("todolist:todolist")) # membuat response
+                response.set_cookie('last_login', str(datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
+                return response
+            else:
+                messages.info(request, 'Username atau Password salah!')
+        context = {}
+
+        # jeda 2 detik untuk menampilkan response
+        time.sleep(2)
+        return render(request, 'login.html', context)
+    ```
+    Views mengarah ke login.html yang terdapat form login di dalamnya
+    ```
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button onClick="myFunction()" class="btn login_btn" type="submit" value="Login">Login</button></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+    ```
+    ### Logout
+    Tambahkan views logic untuk logout di dalam `/todolist/views.py`
+    ```
+    def logout_user(request):
+        logout(request)
+        response = HttpResponseRedirect(reverse('todolist:login'))
+        response.delete_cookie('last_login')
+        return response
+    ```
+    Menambahkan tombol logout di dalam template terkait
+    ```
+    <a href="{% url 'todolist:logout' %}">
+        <button class="logout-button"> 
+            Logout
+        </button>
+    </a>
+    ```
+
+5. Mengatur view halaman todolist di dalam `/todolist/views.py`
+    ```
+    @login_required(login_url='/todolist/login/')
+    def todolist(request):
+        # Mengambil data sesuai dengan user yang login
+        username = request.user.username
+        user_id = request.user.id
+        data_todolist_dikirimkan = Task.objects.filter(user_id=user_id)
+
+        # Merangkum context yang akan dikirimkan ke todolist.html
+        context = { 
+            "username": username,
+            "todolist": data_todolist_dikirimkan
+        }
+        
+        return render(request, "todolist.html", context)
+    ```
+
+6.  Membuat halaman todolist yang memuat todolist, username, tombol task baru, tombol 
+    logout, serta elemen tanggal pembuatan task, judul task, dan deskripsi task
+    ```
+    <html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="{% static 'todolist.css' %}">
+
+        <title>EuTodolist | Todolist</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    {% block content %}
+    <body>
+        <section class="navbar">
+            <a href="{% url 'todolist:create_task' %}">
+                <button class="add-task-button">
+                    Create New Task
+                </button>
+            </a>
+            <h1>
+                Hi {{ username }}, this is your todolist!
+            </h1>
+            <a href="{% url 'todolist:logout' %}">
+                <button class="logout-button"> 
+                Logout
+                </button>
+            </a>
+        </section>
+
+        
+        
+        <div class="todolist">
+            <div class="todolist-list">
+                <div class="todolist-todo">
+                    <h1 style="color:#e05d43;">To Do</h1>
+                    {% for todo in todolist %}
+                        {% if todo.is_finished == False %}
+                            <div class="task-card">
+                                <p class="task-judul">{{todo.title}}</p>
+                                <p class="task-deskripsi">{{todo.description}}</p>
+                                <p class="task-tanggal">Created {{todo.date}}</p>
+                                <!-- {% if todo.is_finished %}
+                                <p>Status: Selesai</p>
+                                {% else %}
+                                <p>Status: Belum Selesai</p>
+                                {% endif %} -->
+                                <div class="task-tombol">
+                                    <!-- pengubahan status dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/change-status/{{todo.id}}">
+                                        <button type="submit" class="task-change-done">Finish >></button>
+                                    </a>
+                                    <!-- penghapusan task dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/delete-task/{{todo.id}}">
+                                        <button type="submit" class="task-delete">Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sekat-vertikal"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="sekat-horizontal"></div>
+                <div class="todolist-done">
+                    <h1 style="color:#25C2A0;">Done</h1>
+                    {% for todo in todolist %}
+                        {% if todo.is_finished %}
+                            <div class="task-card">
+                                <p class="task-judul">{{todo.title}}</p>
+                                <p class="task-deskripsi">{{todo.description}}</p>
+                                <p class="task-tanggal">Created {{todo.date}}</p>
+                                <!-- {% if todo.is_finished %}
+                                <p>Status: Selesai</p>
+                                {% else %}
+                                <p>Status: Belum Selesai</p>
+                                {% endif %} -->
+                                <div class="task-tombol">
+                                    <!-- pengubahan status dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/change-status/{{todo.id}}">
+                                        <button type="submit" class="task-change-todo"><< Rework</button>
+                                    </a>
+                                    <!-- penghapusan task dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/delete-task/{{todo.id}}">
+                                        <button type="submit" class="task-delete">Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sekat-vertikal"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="sekat-vertikal"></div>
+        <div class="sekat-vertikal"></div>
+        <div class="sekat-vertikal"></div>
+
+    </body>
+    {% endblock content %}
+    </html>
+    ```
+    Tampilannya sebagai berikut:
+    ![Alur 7 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-04/alur-07.jpg?raw=true)
+
+7.  Menyusun views logic untuk halaman form dari task baru
+    ```
+    @login_required(login_url='/todolist/login/')
+    def create_task(request):
+        if request.method == "POST":
+            # Mengambil data request melalui TaskForm
+            form = TaskForm(request.POST)
+            # Jika form yang di POST valid
+            if form.is_valid():
+                # cek data yang masuk ke dalam form melalui request.POST
+                # print(form.cleaned_data) 
+                # Menyusun task sesuai model Task untuk dimasukkan ke database
+                task = Task(
+                    user = request.user, # Generate user berdasarkan user yang login
+                    date = datetime.now(), # Generate date sesuai datetime saat POST
+                    title = form.cleaned_data['title'], # Mengambil title dari form di atas
+                    description = form.cleaned_data['description'], # Mengambil description dari form di atas
+                    is_finished = False # Default dari is_finished adalah False
+                )
+                # Memasukkan task ke database
+                task.save()
+                return HttpResponseRedirect("/todolist")
+        else:
+            form = TaskForm()
+
+        # Merender create_task.html
+        return render(request, "create_task.html", {
+            "form": form
+        })
+    ```
+    Menyusun template create_task.html
+    ```
+    <html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="{% static 'create_task.css' %}">
+
+        <title>EuTodolist | Create Task</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    {% block content %}
+    <body>
+
+        <div class="create-task-container">
+            <div class="create-task">
+            <h1>Create New Task</h1>
+
+                <div class="task-form">
+                    <form action="/todolist/create-task/" method="POST">
+                        {% csrf_token %}
+                        <table cellspacing="0" cellpadding="0">  
+                            {{ form.as_table }}
+                        </table>  
+                        <button type="submit">Add Task</button>
+                    </form>   
+                </div>
+
+            </div>  
+        </div>
+
+        <br>
+        <div class="back-button">
+            <a href="{% url 'todolist:todolist' %}">< Back</a>
+        </div>
+
+    </body>
+
+    {% endblock content %}
+    </html>
+    ```
+
+8.  Menyusun routing menuju ke semua fitur website app todolist di `/todolist/urls.py`
+    ```
+    urlpatterns = [
+        path('', todolist, name='todolist'), # http://localhost:8000/todolist/
+        path('login/', login_user, name='login'), # http://localhost:8000/todolist/login
+        path('register/', register, name='register'), # http://localhost:8000/todolist/register
+        path('create-task/', create_task, name='create_task'), # http://localhost:8000/todolist/create-task
+        path('change-status/<int:id>', change_status, name='change_status'),
+        path('delete-task/<int:id>', delete_task, name='delete_task'),
+        path('logout/', logout_user, name='logout'), # http://localhost:8000/todolist/logout
+    ]
+    ```
+
+9.  Melakukan deployment dengan tes workflows ke Heroku 
+    https://pbp-assignment-eugeniusms.herokuapp.com/todolist/
+
+10. Membuat dua akun dummy dan tiga dummy data di situs web Heroku.
+    Silakan login menggunakan akun berikut (akun dummy publik)
+    Nomor | Username | Password
+    --- | --- | --- 
+    1 | pacil | open1234
+    2 | public | open1234 
+
+11. Membuat sebuah README (ini READMEnya)
+
+## BONUS
+
+12. Menambahkan atribut is_finished pada model Task dengan default=False
+    ```
+    from django.db import models
+    from django.contrib.auth.models import User
+
+    class Task(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE) 
+        date = models.DateField()
+        title = models.CharField(max_length=255)
+        description = models.TextField()
+        is_finished = models.BooleanField(default=False)
+    ```
+
+13. Menambahkan status penyelesaian task dan tombol pengubahan status pada todolist.html
+    ```
+    <a href="/todolist/change-status/{{todo.id}}">
+        <button type="submit" class="task-change-done">Finish >></button>
+    </a>
+    ```
+    dan
+    ```
+    <a href="/todolist/change-status/{{todo.id}}">
+        <button type="submit" class="task-change-todo"><< Rework</button>
+    </a>
+    ```
+    Logic dibalik penggantian status ada di `/todolist/views.py`
+    ```
+    @login_required(login_url='/todolist/login/')
+    def change_status(request, id):
+        # Mengambil data task sesuai idnya
+        task = Task.objects.get(id=id)
+
+        # Switch statusnya
+        if task.is_finished:
+            task.is_finished = False
+        else:
+            task.is_finished = True
+
+        # Menyimpan task kembali ke database
+        task.save()
+        # Render ke todolist.html
+        return HttpResponseRedirect("/todolist")
+    ```
+
+14. Menambahkan tombol untuk menghapus suatu task pada todolist.html
+    ```
+    <a href="/todolist/delete-task/{{todo.id}}">
+        <button type="submit" class="task-delete">Delete</button>
+    </a>
+    ```
+    Logic dibalik penghapusan task ada di `/todolist/views.py`
+    ```
+    @login_required(login_url='/todolist/login/')
+    def delete_task(request, id):
+        # Mengambil data task sesuai idnya
+        task = Task.objects.get(id=id)
+        # Menghapus task sesuai idnya
+        task.delete()
+        # Render ke todolist.html
+        return HttpResponseRedirect("/todolist")
+    ```
