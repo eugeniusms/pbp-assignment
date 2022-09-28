@@ -65,7 +65,7 @@ def create_task(request):
         # Jika form yang di POST valid
         if form.is_valid():
             # cek data yang masuk ke dalam form melalui request.POST
-            print(form.cleaned_data) 
+            # print(form.cleaned_data) 
             # Menyusun task sesuai model Task untuk dimasukkan ke database
             task = Task(
                 user = request.user, # Generate user berdasarkan user yang login
