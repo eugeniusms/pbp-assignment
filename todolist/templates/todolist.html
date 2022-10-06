@@ -31,12 +31,23 @@
         </a>
     </section>
 
+    <section class="navbar-mobile">
+        <h1 style="font-size:18px;">
+            Hi {{ username }}, this is your todolist!
+        </h1>
+        <a href="{% url 'todolist:create_task' %}">
+            <button class="add-task-button">
+                Create New Task
+            </button>
+        </a>
+    </section>
+
     
     
     <div class="todolist">
         <div class="todolist-list">
             <div class="todolist-todo">
-                <h1 style="color:#e05d43;">To Do</h1>
+                <h1 style="color:#e05d43;font-size:20px;">To Do</h1>
                 {% for todo in todolist %}
                     {% if todo.is_finished == False %}
                         <div class="task-card">
@@ -65,7 +76,7 @@
             </div>
             <div class="sekat-horizontal"></div>
             <div class="todolist-done">
-                <h1 style="color:#25C2A0;">Done</h1>
+                <h1 style="color:#25C2A0;font-size:20px;">Done</h1>
                 {% for todo in todolist %}
                     {% if todo.is_finished %}
                         <div class="task-card">
@@ -94,6 +105,14 @@
             </div>
         </div>
     </div>
+
+    <section class="logout-mobile">
+        <a href="{% url 'todolist:logout' %}">
+            <button class="logout-button"> 
+            Logout
+            </button>
+        </a>
+    </section>
 
     <div class="sekat-vertikal"></div>
     <div class="sekat-vertikal"></div>
