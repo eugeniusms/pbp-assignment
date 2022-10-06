@@ -479,6 +479,7 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     - Permintaan HTTP yang lebih kecil
     <br>
     <b>Kekurangan:</b>
+    <br>
     - Inline CSS harus diterapkan pada setiap elemen
 
 2.  Internal CSS
@@ -501,7 +502,9 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     - Tidak perlu meng-upload beberapa file karena HTML dan CSS bisa digunakan di file yang sama.
     <br>
     <b>Kekurangan:</b>
+    <br>
     - Meningkatkan waktu akses website
+    <br>
     - Perubahan hanya terjadi pada 1 halaman – tidak efisien bila Anda ingin menggunakan CSS yang sama pada beberapa file
 
 3.  External CSS
@@ -526,6 +529,7 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     - File CSS yang sama bisa digunakan di banyak halaman
     <br>
     <b>Kekurangan:</b>
+    <br>
     - Halaman belum tampil secara sempurna hingga file CSS selesai dipanggil
 
 ## Tag HTML
@@ -544,10 +548,15 @@ TAG | TAG | TAG | TAG | TAG | TAG |
 
 <br>
 Beberapa kegunaan tag tersebut di antaranya adalah:
+<br>
 1.  `a`: Mendefinisikan hyperlink
+<br>
 2.  `b``i``u`: Mendekorasi teks (bold, italic, underline)
+<br>
 3.  `tr`: Memberi garis horizontal
+<br>
 4.  `body``html``section``head``footer``header`: Container dari HTML code
+<br>
 5.  `col``row``table``tr``th``td`: Identifier jenis kolom/baris dalam tabel maupun HTML container lainnya
 <br>
 Dan seterusnya...
