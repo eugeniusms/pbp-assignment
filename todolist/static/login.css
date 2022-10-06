@@ -23,6 +23,7 @@ input {
     border-radius: 6px;
     border: none;
     color: #1B1B1D;
+    width: 160px;
 }
 
 .login-form {
