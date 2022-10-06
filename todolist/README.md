@@ -1768,16 +1768,16 @@ Implementasi hover pada card sebagai berikut, jika dihover maka:
 3. Durasi perubahan adalah 0.2s
 ```
 .task-card {
-background-color: #E3E3E3;
-padding: 10px 30px 20px;
-border-radius: 12px;
-text-align: left;
-width: 25rem;
-box-shadow: 6px 6px #888888;
-/* animation */
-transform: scale(1.0);
-transition-duration: 0.2s;
-opacity: 0.9;
+    background-color: #E3E3E3;
+    padding: 10px 30px 20px;
+    border-radius: 12px;
+    text-align: left;
+    width: 25rem;
+    box-shadow: 6px 6px #888888;
+    /* animation */
+    transform: scale(1.0);
+    transition-duration: 0.2s;
+    opacity: 0.9;
 }
 
 .task-card:hover {
