@@ -65,3 +65,46 @@ a {
 a:hover {
     color: #25C2A0;
 }
+
+/* Mobile & Tab */
+@media only screen and (max-width: 768px) {        
+    .task-form {
+        padding: 10px 10px; 
+        background-color: #E3E3E3;
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+    
+    input {
+        padding: 6px;
+        border-radius: 6px;
+        border: none;
+        color: #1B1B1D;
+        width: 150px;
+    }
+    
+    button {
+        background-color: #1B1B1D;
+        border: none;
+        padding: 8px 20px;
+        margin-top: 20px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+
+    table {
+        font-size: small;
+    }
+    
+    form table tr td {
+        padding: 4px;
+    }
+    
+    a {
+        font-size: 11px;
+        text-decoration: none;
+    }
+}
