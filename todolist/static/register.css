@@ -107,30 +107,103 @@ table tbody tr th label {
     left: 48%;
     bottom: 30px;
     font-size: 17px;
-  }
-  
-  #invalidinput.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
-  
-  @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
-  }
-  
-  @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
-  }
-  
-  @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
-  }
-  
-  @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-  }
+}
+
+#invalidinput.show {
+visibility: visible;
+-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+from {bottom: 0; opacity: 0;} 
+to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+from {bottom: 30px; opacity: 1;} 
+to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+
+/* Mobile & Tab */
+@media only screen and (max-width: 768px) {
+    table {
+        background-color: #E3E3E3;
+        padding: 0px 0px;
+        border-radius: 8px;
+        border: none;
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+
+    .signup-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 0px;
+    }
+
+    input {
+        padding: 3px;
+        border-radius: 3px;
+        border: none;
+        color: #1B1B1D;
+        width: 150px;
+    }
+
+    .signup-form {
+        padding: 0px 0px; 
+        background-color: #E3E3E3;
+        border-radius: 8px;
+    }
+
+    form table tr td {
+        padding: 10px;
+    }
+
+    button {
+        background-color: #1B1B1D;
+        border: none;
+        padding: 8px 28px;
+        margin-top: 12px;
+        border-radius: 6px;
+    }
+
+    .regist-ref {
+        margin-top: none;
+        font-size: 10px;
+    }
+
+
+    .helptext {
+        font-size: 9px;
+        color:rgb(172, 94, 94);
+    }
+
+    .helptext ul li {
+        font-size: 9px;
+        color:rgb(172, 94, 94);
+        width: 100px;
+    }
+
+    .errorlist li {
+        color: white;
+        font-size: small;
+        background-color: rgb(172, 94, 94);
+        padding: 4px;
+        border-radius: 8px;
+    }
+}
