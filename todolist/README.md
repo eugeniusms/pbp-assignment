@@ -477,6 +477,7 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     - Berguna untuk pengujian dalam melihat perubahan
     - Berguna untuk perbaikan cepat
     - Permintaan HTTP yang lebih kecil
+    <br>
     <b>Kekurangan:</b>
     - Inline CSS harus diterapkan pada setiap elemen
 
@@ -498,6 +499,7 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     - Perubahan hanya terjadi pada 1 halaman
     - Class dan ID bisa digunakan oleh internal stylesheet
     - Tidak perlu meng-upload beberapa file karena HTML dan CSS bisa digunakan di file yang sama.
+    <br>
     <b>Kekurangan:</b>
     - Meningkatkan waktu akses website
     - Perubahan hanya terjadi pada 1 halaman – tidak efisien bila Anda ingin menggunakan CSS yang sama pada beberapa file
@@ -522,7 +524,35 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
     - Ukuran file HTML menjadi lebih kecil dan strukturnya lebih rapi
     - Kecepatan loading menjadi lebih cepat
     - File CSS yang sama bisa digunakan di banyak halaman
+    <br>
     <b>Kekurangan:</b>
     - Halaman belum tampil secara sempurna hingga file CSS selesai dipanggil
 
+## Tag HTML
 
+Terdapat banyak tag HTML yang sudah saya ketahui karena terbiasa bekerja sebagai Fullstack Engineer, beberapa diantaranya adalah:
+
+TAG | TAG | TAG | TAG | TAG | TAG |
+--- | --- | --- | --- | --- | --- |
+`<a>` | `<b>` |  `<i>` | `<u>` | `<br>` | `<tr>`
+`<body>` | `<html>` |  `<section>` | `<head>` | `<footer>` | `<header>`
+`<col>` | `<row>` |  `<table>` | `<tr>` | `<th>` | `<td>`
+`<form>` | `<input>` |  `<button>` | `<span>` | `<p>` | `<img>`
+`<label>` | `<li>` |  `<ul>` | `<ol>` | `<option>` | `<script>`
+`<style>` | `<title>` |  `<video>` | `<h1>` | `<h2>` | `<h3>`
+`<h4>` | `<h5>` |  `<h6>` | `<thead>` | `<tbody>` | `<tfoot>`
+
+<br>
+Beberapa kegunaan tag tersebut di antaranya adalah:
+- `<a>`: Mendefinisikan hyperlink
+- `<b><i><u>`: Mendekorasi teks (bold, italic, underline)
+- `<tr>`: Memberi garis horizontal
+- `<body><html><section><head><footer><header>`: Container dari HTML code
+- `<col><row><table><tr><th><td>`: Identifier jenis kolom/baris dalam tabel maupun HTML container lainnya
+<br>
+Dan seterusnya...
+
+<br>
+Dan lain-lain, biasanya saya menggunakan dokumentasi W3School dan MDN Developer Mozilla, linknya dapat diakses di bawah sini:
+- https://www.w3schools.com/tags/default.asp
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Element
