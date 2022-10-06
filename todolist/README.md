@@ -544,11 +544,11 @@ TAG | TAG | TAG | TAG | TAG | TAG |
 
 <br>
 Beberapa kegunaan tag tersebut di antaranya adalah:
-1.  `<a>`: Mendefinisikan hyperlink
-2.  `<b>``<i>``<u>`: Mendekorasi teks (bold, italic, underline)
-3.  `<tr>`: Memberi garis horizontal
-4.  `<body>``<html>``<section>``<head>``<footer>``<header>`: Container dari HTML code
-5.  `<col>``<row>``<table>``<tr>``<th>``<td>`: Identifier jenis kolom/baris dalam tabel maupun HTML container lainnya
+1.  `a`: Mendefinisikan hyperlink
+2.  `b``i``u`: Mendekorasi teks (bold, italic, underline)
+3.  `tr`: Memberi garis horizontal
+4.  `body``html``section``head``footer``header`: Container dari HTML code
+5.  `col``row``table``tr``th``td`: Identifier jenis kolom/baris dalam tabel maupun HTML container lainnya
 <br>
 Dan seterusnya...
 
@@ -621,4 +621,1160 @@ Dan lain-lain, biasanya saya menggunakan dokumentasi W3School dan MDN Developer 
 
 ## Implementasi Proyek
 
-1.  
+1.  Memilih template yang akan dilakukan styling
+2.  Memulai styling dari login.html menggunakan eksternal css native login.css, setiap 
+    selector CSS dalam login.css disesuaikan dengan class yang ada dalam login.html, tampilkan inspect elemen dalam browser untuk menyetel mode responsive ke device mobile dan tablet untuk menyetel CSS media dan menyusunnya dalam login.css.
+    `login.html`
+    ```
+    <html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="{% static 'login.css' %}">
+
+        <title>EuTodolist | Login</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    {% block content %}
+    <body>
+        <div class="login-container">
+            <div class="login">
+                <h1>EuTodolist Login</h1>
+                
+                <div class="login-form">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td>Username</td>
+                                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                            </tr>
+                                    
+                            <tr>
+                                <td>Password</td>
+                                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button onClick="myFunction()" class="btn login_btn" type="submit" value="Login">Login</button></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                    
+                <div class="regist-ref">
+                    Don't have an account yet? <a href="{% url 'todolist:register' %}">Create Account</a>
+                </div>
+
+                <div id="invalidinput">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}  
+                </div>
+
+            </div>
+        </div>
+    </body>
+    {% endblock content %}
+    <!-- script toast jika ada notification tidak valid -->
+    <script>
+    function myFunction() {
+    var x = document.getElementById("invalidinput");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+    }
+    </script>
+    </html>
+    ```
+    `login.css`
+    ```
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        color: white;  
+    }
+    
+    body {
+        margin-top: 32px;
+        text-align:center;
+        background-color: #1B1B1D;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 120px;
+    }
+
+    input {
+        padding: 3px;
+        border-radius: 6px;
+        border: none;
+        color: #1B1B1D;
+        width: 160px;
+    }
+
+    .login-form {
+        padding: 20px 20px; 
+        background-color: #E3E3E3;
+        border-radius: 8px;
+    }
+
+    td {
+        color: #1B1B1D;
+    }
+
+    .login-form form table tr td {
+        padding: 6px;
+    }
+
+    button {
+        background-color: #1B1B1D;
+        border: none;
+        padding: 8px 28px;
+        margin-top: 20px;
+        border-radius: 6px;
+    }
+
+    button:hover {
+        background-color: #25C2A0;
+        color: white;
+    }
+
+    .regist-ref {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .regist-ref a:hover {
+        color: #25C2A0;
+    }
+
+    /* TOAST */
+
+    #invalidinput {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: rgb(131, 9, 9);
+        color: #fff;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px 24px;
+        position: fixed;
+        z-index: 1;
+        left: 48%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #invalidinput.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+    }
+
+    @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+    }
+
+    @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+    }
+
+    @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+    }
+
+    /* Mobile & Tab */
+    @media only screen and (max-width: 768px) {
+        body {
+            margin-top: 32px;
+            text-align:center;
+            background-color: #1B1B1D;
+        }
+        
+        .login-container .login h1 {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .login-form {
+            padding: 10px 10px; 
+            background-color: #E3E3E3;
+            border-radius: 8px;
+        }
+
+        table {
+            font-size: small;
+        }
+        
+        button {
+            background-color: #1B1B1D;
+            border: none;
+            padding: 8px 28px;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+        
+        button:hover {
+            background-color: #25C2A0;
+            color: white;
+        }
+        
+        .regist-ref {
+            margin-top: 15px;
+            font-size: 11px;
+        }
+        
+        .regist-ref a:hover {
+            color: #25C2A0;
+        }
+        
+    }
+    ```
+    ![Res 1 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-01.jpg?raw=true)
+    ![Res 2 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-02.jpg?raw=true)
+3.  Menata halaman register.html
+    `register.html`
+    ```
+    <html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="{% static 'register.css' %}">
+
+        <title>EuTodolist | Sign Up</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    {% block content %}
+    <div class="signup-container">
+        <div class="signup">
+            <h1>EuTodolist Sign Up</h1>  
+
+                <form method="POST" >  
+                    {% csrf_token %}  
+                    <table cellspacing="0" cellpadding="0">  
+                        {{ form.as_table }}  
+                        <tr>  
+                            <td></td>
+                            <td><button type="submit" name="submit" value="Daftar"/>Sign Up</button></td>  
+                        </tr>  
+                    </table>  
+                </form>
+
+            <div class="regist-ref">
+                Already have an account? <a href="{% url 'todolist:login' %}">Login Account</a>
+            </div>
+
+            <div id="invalidinput">
+                {% if messages %}  
+                    <ul>   
+                        {% for message in messages %}  
+                            <li>{{ message }}</li>  
+                            {% endfor %}  
+                    </ul>   
+                {% endif %}
+            </div>
+
+        </div>  
+    </div>
+    <!-- script toast jika ada notification tidak valid -->
+    <script>
+        function myFunction() {
+        var x = document.getElementById("invalidinput");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+        }
+    </script>
+    {% endblock content %}
+    </html>
+    ```
+    `register.css`
+    ```
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        color: white;  
+    }
+    
+    body {
+        margin-top: 16px;
+        text-align:center;
+        background-color: #1B1B1D;
+    }
+
+    .signup-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    input {
+        padding: 6px;
+        border-radius: 6px;
+        border: none;
+        color: #1B1B1D;
+        width: 200px;
+    }
+
+    .signup-form {
+        padding: 20px 20px; 
+        background-color: #E3E3E3;
+        border-radius: 8px;
+    }
+
+    td {
+        color: #1B1B1D;
+    }
+
+    form table tr td {
+        padding: 20px;
+    }
+
+    button {
+        background-color: #1B1B1D;
+        border: none;
+        padding: 8px 28px;
+        margin-top: 20px;
+        border-radius: 6px;
+    }
+
+    button:hover {
+        background-color: #25C2A0;
+        color: white;
+    }
+
+    .regist-ref {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .regist-ref a:hover {
+        color: #25C2A0;
+    }
+
+    table {
+        background-color: #E3E3E3;
+        padding: 40px 40px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    table tbody tr th label {
+        color:#1B1B1D;
+    }
+
+    .helptext {
+        font-size: small;
+        color:rgb(172, 94, 94);
+    }
+
+    .helptext ul li {
+        font-size: small;
+        color:rgb(172, 94, 94);
+    }
+
+    .errorlist li {
+        color: white;
+        font-size: small;
+        background-color: rgb(172, 94, 94);
+        padding: 4px;
+        border-radius: 8px;
+    }
+
+    /* TOAST */
+
+    #invalidinput {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: rgb(131, 9, 9);
+        color: #fff;
+        text-align: center;
+        border-radius: 8px;
+        padding: 16px 24px;
+        position: fixed;
+        z-index: 1;
+        left: 48%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #invalidinput.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+    }
+
+    @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+    }
+
+    @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+    }
+
+    @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+    }
+
+    /* Mobile & Tab */
+    @media only screen and (max-width: 768px) {
+        table {
+            background-color: #E3E3E3;
+            padding: 0px 0px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 11px;
+        }
+
+        h1 {
+            font-size: 18px;
+        }
+
+        .signup-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        input {
+            padding: 3px;
+            border-radius: 3px;
+            border: none;
+            color: #1B1B1D;
+            width: 150px;
+        }
+
+        .signup-form {
+            padding: 10px 10px; 
+            background-color: #E3E3E3;
+            border-radius: 8px;
+        }
+
+        form table tr td {
+            padding: 20px;
+            max-width: 160px;
+        }
+
+        button {
+            background-color: #1B1B1D;
+            border: none;
+            padding: 8px 28px;
+            margin-top: 12px;
+            border-radius: 6px;
+        }
+
+        .regist-ref {
+            margin-top: none;
+            font-size: 10px;
+        }
+
+
+        .helptext {
+            font-size: 9px;
+            color:rgb(172, 94, 94);
+        }
+
+        .helptext ul li {
+            font-size: 9px;
+            color:rgb(172, 94, 94);
+            width: 100px;
+        }
+
+        .errorlist li {
+            color: white;
+            font-size: small;
+            background-color: rgb(172, 94, 94);
+            padding: 4px;
+            border-radius: 8px;
+        }
+    }
+    ```
+    ![Res 3 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-03.jpg?raw=true)
+    ![Res 4 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-04.jpg?raw=true)
+
+4.  Menata create_task.html
+    `create_task.html`
+    ```
+    <html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="{% static 'create_task.css' %}">
+
+        <title>EuTodolist | Create Task</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    {% block content %}
+    <body>
+
+        <div class="create-task-container">
+            <div class="create-task">
+            <h1>Create New Task</h1>
+
+                <div class="task-form">
+                    <form action="/todolist/create-task/" method="POST">
+                        {% csrf_token %}
+                        <table cellspacing="0" cellpadding="0">  
+                            {{ form.as_table }}
+                        </table>  
+                        <button type="submit">Add Task</button>
+                    </form>   
+                </div>
+
+            </div>  
+        </div>
+
+        <br>
+        <div class="back-button">
+            <a href="{% url 'todolist:todolist' %}">< Back</a>
+        </div>
+
+    </body>
+
+    {% endblock content %}
+    </html>
+    ```
+    `create_task.css`
+    ```
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        color: white;  
+    }
+    
+    body {
+        margin-top: 32px;
+        text-align:center;
+        background-color: #1B1B1D;
+    }
+
+    .create-task-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 140px;
+    }
+
+    .task-form {
+        padding: 20px 20px; 
+        background-color: #E3E3E3;
+        border-radius: 8px;
+    }
+
+    input {
+        padding: 6px;
+        border-radius: 6px;
+        border: none;
+        color: #1B1B1D;
+        width: 300px;
+    }
+
+    button {
+        background-color: #1B1B1D;
+        border: none;
+        padding: 8px 28px;
+        margin-top: 20px;
+        border-radius: 6px;
+    }
+
+    button:hover {
+        background-color: #25C2A0;
+        color: white;
+    }
+
+    table tbody tr th label {
+        color:#1B1B1D;
+    }
+
+    td {
+        color: #1B1B1D;
+    }
+
+    form table tr td {
+        padding: 10px;
+    }
+
+    a {
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #25C2A0;
+    }
+
+    /* Mobile & Tab */
+    @media only screen and (max-width: 768px) {        
+        .task-form {
+            padding: 10px 10px; 
+            background-color: #E3E3E3;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 18px;
+        }
+        
+        input {
+            padding: 6px;
+            border-radius: 6px;
+            border: none;
+            color: #1B1B1D;
+            width: 150px;
+        }
+        
+        button {
+            background-color: #1B1B1D;
+            border: none;
+            padding: 8px 20px;
+            margin-top: 20px;
+            border-radius: 6px;
+            font-size: 11px;
+        }
+
+        table {
+            font-size: small;
+        }
+        
+        form table tr td {
+            padding: 4px;
+        }
+        
+        a {
+            font-size: 11px;
+            text-decoration: none;
+        }
+    }
+    ```
+    ![Res 5 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-05.jpg?raw=true)
+    ![Res 6 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-06.jpg?raw=true)
+
+5.  Menata todolist.html
+    `todolist.html`
+    ```
+    <html>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"  href="{% static 'todolist.css' %}">
+
+        <title>EuTodolist | Todolist</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    </head>
+
+    {% block content %}
+    <body>
+        <section class="navbar">
+            <a href="{% url 'todolist:create_task' %}">
+                <button class="add-task-button">
+                    Create New Task
+                </button>
+            </a>
+            <h1>
+                Hi {{ username }}, this is your todolist!
+            </h1>
+            <a href="{% url 'todolist:logout' %}">
+                <button class="logout-button"> 
+                Logout
+                </button>
+            </a>
+        </section>
+
+        <section class="navbar-mobile">
+            <h1 style="font-size:18px;">
+                Hi {{ username }}, this is your todolist!
+            </h1>
+            <a href="{% url 'todolist:create_task' %}">
+                <button class="add-task-button">
+                    Create New Task
+                </button>
+            </a>
+        </section>
+
+        
+        
+        <div class="todolist">
+            <div class="todolist-list">
+                <div class="todolist-todo">
+                    <h1 style="color:#e05d43;font-size:20px;">To Do</h1>
+                    {% for todo in todolist %}
+                        {% if todo.is_finished == False %}
+                            <div class="task-card">
+                                <p class="task-judul">{{todo.title}}</p>
+                                <p class="task-deskripsi">{{todo.description}}</p>
+                                <p class="task-tanggal">Created {{todo.date}}</p>
+                                <!-- {% if todo.is_finished %}
+                                <p>Status: Selesai</p>
+                                {% else %}
+                                <p>Status: Belum Selesai</p>
+                                {% endif %} -->
+                                <div class="task-tombol">
+                                    <!-- pengubahan status dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/change-status/{{todo.id}}">
+                                        <button type="submit" class="task-change-done">Finish >></button>
+                                    </a>
+                                    <!-- penghapusan task dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/delete-task/{{todo.id}}">
+                                        <button type="submit" class="task-delete">Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sekat-vertikal"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="sekat-horizontal"></div>
+                <div class="todolist-done">
+                    <h1 style="color:#25C2A0;font-size:20px;">Done</h1>
+                    {% for todo in todolist %}
+                        {% if todo.is_finished %}
+                            <div class="task-card">
+                                <p class="task-judul">{{todo.title}}</p>
+                                <p class="task-deskripsi">{{todo.description}}</p>
+                                <p class="task-tanggal">Created {{todo.date}}</p>
+                                <!-- {% if todo.is_finished %}
+                                <p>Status: Selesai</p>
+                                {% else %}
+                                <p>Status: Belum Selesai</p>
+                                {% endif %} -->
+                                <div class="task-tombol">
+                                    <!-- pengubahan status dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/change-status/{{todo.id}}">
+                                        <button type="submit" class="task-change-todo"><< Rework</button>
+                                    </a>
+                                    <!-- penghapusan task dilakukan di penembakan url berikut -->
+                                    <a href="/todolist/delete-task/{{todo.id}}">
+                                        <button type="submit" class="task-delete">Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="sekat-vertikal"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <section class="logout-mobile">
+            <a href="{% url 'todolist:logout' %}">
+                <button class="logout-button"> 
+                Logout
+                </button>
+            </a>
+        </section>
+
+        <div class="sekat-vertikal"></div>
+        <div class="sekat-vertikal"></div>
+        <div class="sekat-vertikal"></div>
+
+    </body>
+    {% endblock content %}
+    </html>
+    ```
+    `todolist.css`
+    ```
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        color: #1B1B1D; 
+    }
+    
+    body {
+        margin-top: 32px;
+        text-align:center;
+        background-color: #1B1B1D;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-mobile {
+        display: none;
+    }
+
+    .logout-mobile {
+        display: none;
+    }
+
+    .add-task-button {
+        background-color: #25C2A0;
+        padding: 10px 30px;
+        border: none;
+        margin-left: 20px;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .logout-button {
+        background-color: #e05d43;
+        padding: 10px 30px;
+        border: none;
+        margin-right: 20px;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    .add-task-button:hover {
+        color: white;
+    }
+
+    .logout-button:hover {
+        color: white;
+    }
+
+    .todolist {
+        display: flex;
+        justify-content: center;
+    }
+
+    .todolist-list {
+        display: flex;
+    }
+
+    .task-card {
+        background-color: #E3E3E3;
+        padding: 10px 30px 20px;
+        border-radius: 12px;
+        text-align: left;
+        width: 25rem;
+        box-shadow: 6px 6px #888888;
+        /* animation */
+        transform: scale(1.0);
+        transition-duration: 0.2s;
+        opacity: 0.9;
+    }
+
+    .task-card:hover {
+        /* animation */
+        transform: scale(1.03);
+        transition-duration: 0.2s;
+        opacity: 1;
+    }
+
+    .task-card .task-judul {
+        font-weight: 800;
+    }
+
+    .task-card .task-deskripsi {
+        font-size: small;
+    }
+
+    .task-card .task-tanggal {
+        text-align: right;
+        font-size: 11px;
+        font-style: italic;
+        color: #888888;
+        font-weight: 300;
+    }
+
+    .task-card .task-tombol {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .task-card .task-tombol .task-change-done {
+        background-color: #E3E3E3;
+        border: 2px solid #c2c0c0;
+        padding: 6px 20px;
+        border-radius: 6px;
+        font-size: small;
+    }
+
+    .task-card .task-tombol .task-change-done:hover {
+        background-color: #66dec4;
+        border: 2px solid #66dec4;
+    }
+
+    .task-card .task-tombol .task-change-todo {
+        background-color: #E3E3E3;
+        border: 2px solid #c2c0c0;
+        padding: 6px 20px;
+        border-radius: 6px;
+        font-size: small;
+    }
+
+    .task-card .task-tombol .task-change-todo:hover {
+        background-color: #f7b0a2;
+        border: 2px solid #f7b0a2;
+    }
+
+    .task-card .task-tombol .task-delete {
+        background-color: #E3E3E3;
+        border: 2px solid #e05d43;
+        padding: 6px 20px;
+        border-radius: 6px;
+        font-size: small;
+        font-weight: 600;
+        color: #e05d43;
+    }
+
+    .task-card .task-tombol .task-delete:hover {
+        background-color: #e05d43;
+        border: 2px solid #e05d43;
+        color: white;
+    }
+
+    .sekat-horizontal {
+        width: 40px;
+    }
+
+    .sekat-vertikal {
+        height: 20px;
+    }
+
+    h1 {
+        color: white;
+        font-size: 24px;
+    }
+
+    /* Mobile & Tab */
+    @media only screen and (max-width: 990px) {
+        body {
+            margin-top: 32px;
+            text-align:center;
+            background-color: #1B1B1D;
+        }
+        
+        .navbar {
+            display: none;
+        }
+
+        .navbar-mobile {
+            display: block;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 40px;
+        }
+
+        .logout-mobile {
+            display: block;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .add-task-button {
+            background-color: #25C2A0;
+            padding: 10px 20px;
+            border: none;
+            margin-top: 20px;
+            margin-left: 0px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        
+        .logout-button {
+            background-color: #e05d43;
+            padding: 10px 20px;
+            border: none;
+            margin-right: 0px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        
+        .add-task-button:hover {
+            color: white;
+        }
+        
+        .logout-button:hover {
+            color: white;
+        }
+        
+        .todolist {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .todolist-list {
+            display: block;
+            margin-top: 20px;
+        }
+        
+        .task-card {
+            background-color: #E3E3E3;
+            padding: 4px 30px 14px;
+            border-radius: 12px;
+            text-align: left;
+            width: 16rem;
+            box-shadow: 6px 6px #888888;
+            /* animation */
+            transform: scale(1.0);
+            transition-duration: 0.2s;
+            opacity: 0.9;
+        }
+        
+        .task-card:hover {
+            /* animation */
+            transform: scale(1.03);
+            transition-duration: 0.2s;
+            opacity: 1;
+        }
+        
+        .task-card .task-judul {
+            font-weight: 800;
+            font-size: 14px;
+        }
+        
+        .task-card .task-deskripsi {
+            font-size: 10px;
+        }
+        
+        .task-card .task-tanggal {
+            text-align: right;
+            font-size: 9px;
+            font-style: italic;
+            color: #888888;
+            font-weight: 300;
+        }
+        
+        .task-card .task-tombol {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .task-card .task-tombol .task-change-done {
+            background-color: #E3E3E3;
+            border: 2px solid #c2c0c0;
+            padding: 6px 20px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        
+        .task-card .task-tombol .task-change-done:hover {
+            background-color: #66dec4;
+            border: 2px solid #66dec4;
+        }
+        
+        .task-card .task-tombol .task-change-todo {
+            background-color: #E3E3E3;
+            border: 2px solid #c2c0c0;
+            padding: 6px 20px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        
+        .task-card .task-tombol .task-change-todo:hover {
+            background-color: #f7b0a2;
+            border: 2px solid #f7b0a2;
+        }
+        
+        .task-card .task-tombol .task-delete {
+            background-color: #E3E3E3;
+            border: 2px solid #e05d43;
+            padding: 6px 20px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #e05d43;
+        }
+        
+        .task-card .task-tombol .task-delete:hover {
+            background-color: #e05d43;
+            border: 2px solid #e05d43;
+            color: white;
+        }
+        
+        .sekat-horizontal {
+            width: 40px;
+        }
+        
+        .sekat-vertikal {
+            height: 20px;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 24px;
+        }
+    }
+    ```
+    ![Res 7 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-07.jpg?raw=true)
+    ![Res 8 by Eugenius Mario Situmorang](https://github.com/eugeniusms/pbp-tugas-02/blob/main/assets/images/tugas-05/responsive-08.jpg?raw=true)
+
+## BONUS
+
+Implementasi hover pada card sebagai berikut, jika dihover maka:
+1. Skala bertambah 3%
+2. Opacity 100%
+3. Durasi perubahan adalah 0.2s
+```
+.task-card {
+background-color: #E3E3E3;
+padding: 10px 30px 20px;
+border-radius: 12px;
+text-align: left;
+width: 25rem;
+box-shadow: 6px 6px #888888;
+/* animation */
+transform: scale(1.0);
+transition-duration: 0.2s;
+opacity: 0.9;
+}
+
+.task-card:hover {
+    /* animation */
+    transform: scale(1.03);
+    transition-duration: 0.2s;
+    opacity: 1;
+}
+```
