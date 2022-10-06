@@ -544,11 +544,11 @@ TAG | TAG | TAG | TAG | TAG | TAG |
 
 <br>
 Beberapa kegunaan tag tersebut di antaranya adalah:
-- `<a>`: Mendefinisikan hyperlink
-- `<b><i><u>`: Mendekorasi teks (bold, italic, underline)
-- `<tr>`: Memberi garis horizontal
-- `<body><html><section><head><footer><header>`: Container dari HTML code
-- `<col><row><table><tr><th><td>`: Identifier jenis kolom/baris dalam tabel maupun HTML container lainnya
+1.  `<a>`: Mendefinisikan hyperlink
+2.  `<b>``<i>``<u>`: Mendekorasi teks (bold, italic, underline)
+3.  `<tr>`: Memberi garis horizontal
+4.  `<body>``<html>``<section>``<head>``<footer>``<header>`: Container dari HTML code
+5.  `<col>``<row>``<table>``<tr>``<th>``<td>`: Identifier jenis kolom/baris dalam tabel maupun HTML container lainnya
 <br>
 Dan seterusnya...
 
@@ -556,3 +556,69 @@ Dan seterusnya...
 Dan lain-lain, biasanya saya menggunakan dokumentasi W3School dan MDN Developer Mozilla, linknya dapat diakses di bawah sini:
 - https://www.w3schools.com/tags/default.asp
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+
+## Tipe Selector CSS
+
+1.  Tag
+    Tipe ini memilih elemen yang didekorasi berdasarkan tag HTML yang ada di dalam file HTMLnya.
+    <br>
+    <b>Penggunaan:</b>
+    ```
+    p {
+        color: blue;
+    }
+    ```
+
+2.  Class
+    Tipe ini memilih elemen yang didekorasi berdasarkan class yang didefinisikan dalam tag HTMLnya.
+    <br>
+    <b>Penggunaan:</b>
+    ```
+    .classname {
+        color: blue;
+    }
+    ```
+
+3.  Id
+    Tipe ini memilih elemen yang didekorasi berdasarkan id yang didefinisikan dalam tag HTMLnya.
+    <br>
+    <b>Penggunaan:</b>
+    ```
+    #id {
+        color: blue;
+    }
+    ```
+
+4.  Atribut
+    Tipe ini memilih elemen yang didekorasi berdasarkan atribut dalam tag HTML
+    <br>
+    <b>Penggunaan:</b>
+    ```
+    input[type=text] {
+        color: blue;
+    }
+    ```
+
+5.  Universal
+    Tipe ini memilih elemen yang didekorasi berdasarkan jangkauan tertentu, contohnya * untuk select semua elemen yang ada dalam HTML
+    <br>
+    <b>Penggunaan:</b>
+    ```
+    * {
+        color: blue;
+    }
+    ```
+
+6.  Pseudo
+    Tipe ini memilih elemen yang didekorasi berdasarkan elemen semu seperti state pada elemen, elemen before dan after, elemen ganjil, dan sebagainya. Ada pseudo-class dan pseudo-element.
+    <br>
+    <b>Penggunaan:</b>
+    ```
+    selector:hover {
+        color: blue;
+    }
+    ```
+
+## Implementasi Proyek
+
+1.  
