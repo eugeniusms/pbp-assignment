@@ -60,6 +60,17 @@ body {
     text-align: left;
     width: 25rem;
     box-shadow: 6px 6px #888888;
+    /* animation */
+    transform: scale(1.0);
+    transition-duration: 0.2s;
+    opacity: 0.9;
+}
+
+.task-card:hover {
+    /* animation */
+    transform: scale(1.03);
+    transition-duration: 0.2s;
+    opacity: 1;
 }
 
 .task-card .task-judul {
