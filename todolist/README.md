@@ -463,3 +463,66 @@ Pertama-tama kita dapat menentukan action dan method yang digunakan dalam form, 
         # Render ke todolist.html
         return HttpResponseRedirect("/todolist")
     ```
+
+# TUGAS 5
+
+## Perbedaan, Kelebihan, dan Kekurangan dari Inline, Internal, dan External CSS
+1.  Inline CSS
+    CSS ditulis di dalam tag yang ada dalam HTML. Untuk menambahkan style, perlu pengubahan pada elemen-elemen sesuai tag masing-masing.
+    Contoh: 
+    ```
+    <div style="color:white;padding:10px;" class="nama">Eugenius Mario</div>
+    ```
+    <b>Kelebihan:</b>
+    - Berguna untuk pengujian dalam melihat perubahan
+    - Berguna untuk perbaikan cepat
+    - Permintaan HTTP yang lebih kecil
+    <b>Kekurangan:</b>
+    - Inline CSS harus diterapkan pada setiap elemen
+
+2.  Internal CSS
+    CSS ditulis di dalam file HTML tetapi bukan pada tag tertentu melainkan terdapat tag khusus bernama `<style>`. Semua style CSS dimasukkan ke dalam tag tersebut.
+    Contoh: 
+    ```
+    <style>
+        .nama {
+            color: white;
+            padding: 10px;
+        }
+    </style>
+    <body>
+        <div class="nama">Eugenius Mario</div>
+    </body>
+    ```
+    <b>Kelebihan:</b>
+    - Perubahan hanya terjadi pada 1 halaman
+    - Class dan ID bisa digunakan oleh internal stylesheet
+    - Tidak perlu meng-upload beberapa file karena HTML dan CSS bisa digunakan di file yang sama.
+    <b>Kekurangan:</b>
+    - Meningkatkan waktu akses website
+    - Perubahan hanya terjadi pada 1 halaman – tidak efisien bila Anda ingin menggunakan CSS yang sama pada beberapa file
+
+3.  External CSS
+    CSS ditulis di dalam file yang berbeda dengan file HTML, contoh dasarnya adalah file ditulis sesuai nama file HTML dengan format .css.
+    `index.html`
+    ```
+    <head>
+        <link rel="stylesheet" type="text/css" href="index.css" />
+    </head>
+    <div class="nama">Eugenius Mario</div>
+    ```
+    `index.css`
+    ```
+    .nama {
+        color: white;
+        padding: 10px;
+    }
+    ```
+    <b>Kelebihan:</b>
+    - Ukuran file HTML menjadi lebih kecil dan strukturnya lebih rapi
+    - Kecepatan loading menjadi lebih cepat
+    - File CSS yang sama bisa digunakan di banyak halaman
+    <b>Kekurangan:</b>
+    - Halaman belum tampil secara sempurna hingga file CSS selesai dipanggil
+
+
