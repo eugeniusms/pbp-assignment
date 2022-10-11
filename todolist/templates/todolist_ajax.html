@@ -63,6 +63,19 @@
                 }
             }
 
+            // AJAX [POST]
+            $('#add-todo').click(function () {
+                if ($('#title').val() && $('#description').val()) {
+                    $.post(
+                        url = '/todolist/add/',
+                        data = {
+                            title: $('#title').val(),
+                            description: $('#description').val(),
+                        },
+                    )
+                }
+            })
+
             // AJAX [DELETE]
             const deleteTodoCard = (todo) => {
                 $(`#${todo.pk}-delete`).click(function () {
@@ -78,7 +91,6 @@
                     })
                 })
             }
-
         });
     </script>
 </head>
@@ -128,7 +140,21 @@
     <div id="modalTodo" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <div class="create-task-container">
+                <div class="create-task">
+                <h1>Create New Task</h1>
+        
+                <div class="task-form">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="title" id="title" placeholder="title" required/>
+                        <input type="text" name="description" id="description" placeholder="description" required/>
+                        <button type="submit" id="add-todo">Add Todo</button>
+                    </form>   
+                </div>
+        
+                </div>  
+            </div>
         </div>
     </div>
 

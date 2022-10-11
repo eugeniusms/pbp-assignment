@@ -19,6 +19,7 @@ from django.http import HttpResponse
 from django.core import serializers
 
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 import time
 
@@ -139,3 +140,28 @@ def delete_task(request, id):
 def show_json(request):
     data = Task.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def add_todo(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        todo = Task.objects.create(
+            user=request.user,
+            title=title, 
+            description=description,
+            date=datetime.now(), 
+            is_finished=False
+        )
+
+        context = {
+            'pk':todo.pk,
+            'fields':{
+                'title':todo.title,
+                'description':todo.description,
+                'is_finished':todo.is_finished,
+                'date':todo.date,
+            }
+        }
+
+        return JsonResponse(context)
