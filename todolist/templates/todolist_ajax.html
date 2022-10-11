@@ -147,8 +147,16 @@
                 <div class="task-form">
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <input type="text" name="title" id="title" placeholder="title" required/>
-                        <input type="text" name="description" id="description" placeholder="description" required/>
+                        <table>
+                        <tr>
+                            <td><span>Title</span></td>
+                            <td><input type="text" name="title" id="title" placeholder="title" required/></td>
+                        </tr>
+                        <tr>
+                            <td><span>Description&nbsp;&nbsp;</span></td>
+                            <td><input type="textarea" name="description" id="description" placeholder="description" required/></tr>
+                        </tr>
+                        </table>
                         <button type="submit" id="add-todo">Add Todo</button>
                     </form>   
                 </div>
