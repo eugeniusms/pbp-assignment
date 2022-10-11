@@ -137,5 +137,5 @@ def delete_task(request, id):
 # 2. https://www.w3schools.com/django/django_delete_record.php
 
 def show_json(request):
-    data = Task.objects.all()
+    data = Task.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
