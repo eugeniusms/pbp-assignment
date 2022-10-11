@@ -109,6 +109,17 @@
             </button>
         </a>
     </section>
+
+    <section class="navbar-mobile">
+        <h1 style="font-size:18px;">
+            Hi {{ username }}, this is your todolist!
+        </h1>
+        <a href="{% url 'todolist:create_task' %}">
+            <button class="add-task-button">
+                Create New Task
+            </button>
+        </a>
+    </section>
     
     <div class="todolist">
         <div class="todolist-list">
