@@ -1,0 +1,135 @@
+<html>
+{% load static %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet"  href="{% static 'todolist.css' %}">
+    <script>
+        $(document).ready(function(){
+            // AJAX [GET]
+            // mendapatkan todo dari json yang ada di "http://localhost:8000/todolist/json"
+            // untuk diletakkan dalam todolist_ajax.html ini
+            $.get('/todolist/json', function (todolist) {
+                todolist.map((todo) => {
+                    console.log(todo)
+                    if (todo.fields.is_finished) {
+                        $('#todo-finish-card').append(todoCard(todo))
+                    } else {
+                        $('#todo-unfinish-card').append(todoCard(todo))
+                    }
+                    deleteTodoCard(todo)
+                })
+            })
+            
+            // fungsi penyusun card todo
+            const todoCard = (todo) => {
+                if (todo.fields.is_finished) {
+                    return `
+                        <div class="task-card" id=${todo.pk}>
+                            <p class="task-judul">${todo.fields.title}</p>
+                            <p class="task-deskripsi">${todo.fields.description}</p>
+                            <p class="task-tanggal">Created ${todo.fields.date}</p>
+                            <div class="task-tombol">
+                                <a href="/todolist/change-status/${todo.pk}">
+                                    <button class="task-change-todo" type="submit">
+                                        << Rework
+                                    </button>
+                                </a>
+
+                                    <button class="task-delete" type="submit" id='${todo.pk}-delete'>
+                                        Delete
+                                    </button>
+                            </div>
+                        </div>
+                        <div class="sekat-vertikal"></div>
+                    `
+                } else {
+                    return `
+                        <div class="task-card" id=${todo.pk}>
+                            <p class="task-judul">${todo.fields.title}</p>
+                            <p class="task-deskripsi">${todo.fields.description}</p>
+                            <p class="task-tanggal">Created ${todo.fields.date}</p>
+                            <div class="task-tombol">
+                                <a href="/todolist/change-status/${todo.pk}">
+                                    <button class="task-change-done" type="submit">
+                                        Finish >>
+                                    </button>
+                                </a>
+                                    <button class="task-delete" type="submit" id='${todo.pk}-delete'>
+                                        Delete
+                                    </button>
+                            </div>
+                        </div>
+                        <div class="sekat-vertikal"></div>
+                    `
+                }
+            }
+
+            // AJAX [DELETE]
+            const deleteTodoCard = (todo) => {
+                $(`#${todo.pk}-delete`).click(function () {
+                $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: `/todolist/delete-task/${todo.pk}`,
+                        type: 'DELETE',
+                        success: function (response) {
+                            $(`#${todo.pk}`).remove()
+                        },
+                    })
+                })
+            }
+        });
+    </script>
+</head>
+
+{% block content %}
+<body>
+
+    <section class="navbar-mobile">
+        <h1 style="font-size:18px;">
+            Hi {{ username }}, this is your todolist!
+        </h1>
+        <a href="{% url 'todolist:create_task' %}">
+            <button class="add-task-button">
+                Create New Task
+            </button>
+        </a>
+    </section>
+    
+    <div class="todolist">
+        <div class="todolist-list">
+            <div class="todolist-todo">
+                <h1 style="color:#e05d43;font-size:20px;">To Do</h1>
+                <div id="todo-unfinish-card"></div>
+            </div>
+            <div class="sekat-horizontal"></div>
+            <div class="todolist-done">
+                <h1 style="color:#25C2A0;font-size:20px;">Done</h1>
+                <div id="todo-finish-card"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MELETAKKAN DATA DARI AJAX [GET]-->
+    <br><br><br>
+    <div class="d-flex justify-content-center">
+        <div class="daftar-barang"></div>
+    </div>
+
+
+    <section class="logout-mobile">
+        <a href="{% url 'todolist:logout' %}">
+            <button class="logout-button"> 
+            Logout
+            </button>
+        </a>
+    </section>
+
+    <div class="sekat-vertikal"></div>
+    <div class="sekat-vertikal"></div>
+    <div class="sekat-vertikal"></div>
+
+</body>
+{% endblock content %}
+</html>

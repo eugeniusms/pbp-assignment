@@ -15,6 +15,11 @@ from todolist.forms import TaskForm
 from todolist.models import Task
 from datetime import datetime
 
+from django.http import HttpResponse
+from django.core import serializers
+
+from django.views.decorators.csrf import csrf_exempt
+
 import time
 
 def register(request):
@@ -85,6 +90,7 @@ def create_task(request):
         "form": form
     })
 
+@csrf_exempt # https://stackoverflow.com/questions/12731305/django-csrf-token-missing-or-incorrect
 @login_required(login_url='/todolist/login/')
 def todolist(request):
     # Mengambil data sesuai dengan user yang login
@@ -98,7 +104,7 @@ def todolist(request):
         "todolist": data_todolist_dikirimkan
     }
     
-    return render(request, "todolist.html", context)
+    return render(request, "todolist_ajax.html", context)
 
 @login_required(login_url='/todolist/login/')
 def change_status(request, id):
@@ -116,6 +122,7 @@ def change_status(request, id):
     # Render ke todolist.html
     return HttpResponseRedirect("/todolist")
 
+@csrf_exempt # https://stackoverflow.com/questions/12731305/django-csrf-token-missing-or-incorrect
 @login_required(login_url='/todolist/login/')
 def delete_task(request, id):
     # Mengambil data task sesuai idnya
@@ -128,3 +135,7 @@ def delete_task(request, id):
 # References:
 # 1. https://www.youtube.com/watch?v=3XOS_UpJirU
 # 2. https://www.w3schools.com/django/django_delete_record.php
+
+def show_json(request):
+    data = Task.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
