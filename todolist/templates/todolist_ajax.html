@@ -10,7 +10,7 @@
             // untuk diletakkan dalam todolist_ajax.html ini
             $.get('/todolist/json', function (todolist) {
                 todolist.map((todo) => {
-                    console.log(todo)
+                    // console.log(todo)
                     if (todo.fields.is_finished) {
                         $('#todo-finish-card').append(todoCard(todo))
                     } else {
