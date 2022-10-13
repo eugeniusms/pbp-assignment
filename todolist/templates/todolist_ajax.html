@@ -19,7 +19,7 @@
                     deleteTodoCard(todo)
                 })
             })
-            
+
             // fungsi penyusun card todo
             const todoCard = (todo) => {
                 if (todo.fields.is_finished) {
@@ -86,7 +86,15 @@
                     )
                 }
                 const modalTodo = document.querySelector('#modalTodo')
-                modalTodo.style="display: none;"
+                const inputFormTitle = document.querySelector('#title')
+                const inputFormDescription = document.querySelector('#description')
+
+                if (inputFormTitle.value == "" || inputFormDescription.value == "") {
+                    // jangan ditutup
+                    alert("Invalid Title or Description Input!");
+                } else {
+                    modalTodo.style="display: none;"
+                }
             })
 
             // AJAX [DELETE]
@@ -182,7 +190,7 @@
                         </tr>
                         <tr>
                             <td><span>Description&nbsp;&nbsp;</span></td>
-                            <td><input type="textarea" name="description" id="description" placeholder="description" required/></tr>
+                            <td><input type="text" name="description" id="description" placeholder="description" required/></tr>
                         </tr>
                         </table>
                         <button type="submit" id="add-todo">Add Todo</button>
@@ -214,7 +222,6 @@
         }
     }
 </script>
-
 </body>
 {% endblock content %}
 </html>
